@@ -1,27 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contact</title>
-<link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — NOVA</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- JS -->
+  <script defer src="js/main.js"></script>
 </head>
 <body>
 
-
+<!-- NAVBAR -->
 <header class="navbar">
-<h1>Project Blog</h1>
+  <div class="logo">NOVA</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="showcase.html">Showcase</a>
+    <a href="resources.html">Resources</a>
+    <a href="contact.html" class="active btn-nav">Contact</a>
+  </nav>
 </header>
 
-
-<section class="page">
-<h2>Contact</h2>
-<p>EXAMPLE – contact us.</p>
+<!-- HERO -->
+<section class="page-hero">
+  <h1 class="reveal">Contact Us</h1>
+  <p class="reveal">
+    Have a question, collaboration idea, or feedback?  
+    Reach out — we read every message carefully.
+  </p>
 </section>
 
+<!-- CONTACT SECTION -->
+<section class="section">
 
-<footer>© 2025 – EXAMPLE</footer>
+  <div class="contact-grid">
 
+    <!-- CONTACT INFO -->
+    <div class="contact-info reveal">
+      <h2>Get in Touch</h2>
+      <p>
+        NOVA is open to collaboration, research discussions,
+        feedback, and general inquiries.
+      </p>
+
+      <div class="contact-item">
+        <i class="fa-solid fa-envelope"></i>
+        <span>contact@nova-projects.dev</span>
+      </div>
+
+      <div class="contact-item">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>Remote / Global</span>
+      </div>
+
+      <div class="contact-item">
+        <i class="fa-solid fa-clock"></i>
+        <span>Response time: 24–48 hours</span>
+      </div>
+
+      <div class="socials large">
+        <i class="fa-brands fa-github"></i>
+        <i class="fa-brands fa-x-twitter"></i>
+        <i class="fa-brands fa-discord"></i>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <form class="contact-form reveal">
+      <h2>Send a Message</h2>
+
+      <label>
+        Full Name
+        <input type="text" placeholder="Your name" required>
+      </label>
+
+      <label>
+        Email Address
+        <input type="email" placeholder="you@example.com" required>
+      </label>
+
+      <label>
+        Subject
+        <input type="text" placeholder="Project inquiry / Feedback / Other">
+      </label>
+
+      <label>
+        Message
+        <textarea rows="6" placeholder="Write your message here..." required></textarea>
+      </label>
+
+      <button type="submit" class="btn-primary">
+        <i class="fa-solid fa-paper-plane"></i> Send Message
+      </button>
+
+      <p class="form-note">
+        This form is currently for demonstration purposes.
+        Backend integration can be added later.
+      </p>
+    </form>
+
+  </div>
+
+</section>
+
+<!-- FAQ -->
+<section class="section alt-bg">
+
+  <h2 class="section-title reveal">Frequently Asked Questions</h2>
+
+  <div class="faq reveal">
+    <h3>Is NOVA an open project?</h3>
+    <p>
+      Yes. Most projects and documentation are shared openly
+      to support learning and collaboration.
+    </p>
+  </div>
+
+  <div class="faq reveal">
+    <h3>Can I contribute?</h3>
+    <p>
+      Contributions, feedback, and discussions are always welcome.
+      Reach out through the contact form or social platforms.
+    </p>
+  </div>
+
+  <div class="faq reveal">
+    <h3>Do you accept partnerships?</h3>
+    <p>
+      We selectively collaborate on projects aligned with our
+      values and long-term vision.
+    </p>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h3>NOVA</h3>
+      <p>
+        Building meaningful digital projects with clarity,
+        structure, and responsibility.
+      </p>
+    </div>
+
+    <div>
+      <h4>Navigation</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="showcase.html">Showcase</a>
+    </div>
+
+    <div>
+      <h4>Social</h4>
+      <div class="socials">
+        <i class="fa-brands fa-github"></i>
+        <i class="fa-brands fa-x-twitter"></i>
+        <i class="fa-brands fa-discord"></i>
+      </div>
+    </div>
+  </div>
+
+  <p class="copyright">
+    © 2025 NOVA Digital Projects. All rights reserved.
+  </p>
+</footer>
 
 </body>
 </html>
