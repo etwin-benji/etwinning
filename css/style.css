@@ -35,10 +35,15 @@ body {
   overflow-x: hidden;
 }
 
-/* Prevent text overflow */
-p, h1, h2, h3, h4, li {
-  word-wrap: break-word;
+/* Prevent text touching edges or overflowing */
+p,
+h1,
+h2,
+h3,
+h4,
+li {
   overflow-wrap: break-word;
+  word-break: normal;
 }
 
 /* =========================
@@ -135,7 +140,6 @@ a {
   font-weight: 700;
 }
 
-/* Mobile toggle */
 .nav-toggle {
   display: none;
   font-size: 1.6rem;
@@ -143,7 +147,21 @@ a {
 }
 
 /* =========================
-   HERO SECTIONS
+   HERO (INDEX PAGE FIX)
+========================= */
+
+.hero {
+  padding: 7rem 6% 5rem;
+}
+
+.hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-inline: 1.5rem;
+}
+
+/* =========================
+   PAGE HERO (OTHER PAGES)
 ========================= */
 
 .page-hero {
@@ -312,7 +330,6 @@ footer {
 ========================= */
 
 @media (max-width: 768px) {
-
   .nav-toggle {
     display: block;
   }
@@ -331,6 +348,14 @@ footer {
 
   .nav-links.active {
     display: flex;
+  }
+
+  .hero {
+    padding: 5rem 5% 4rem;
+  }
+
+  .hero-inner {
+    padding-inline: 1.25rem;
   }
 
   .showcase-card {
