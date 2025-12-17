@@ -1,27 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Projects</title>
-<link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — NOVA</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- JS -->
+  <script defer src="js/main.js"></script>
 </head>
 <body>
 
-
+<!-- NAVBAR -->
 <header class="navbar">
-<h1>Project Blog</h1>
+  <div class="logo">NOVA</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="showcase.html">Showcase</a>
+    <a href="resources.html">Resources</a>
+    <a href="contact.html" class="btn-nav">Contact</a>
+  </nav>
 </header>
 
-
-<section class="page">
-<h2>Projects</h2>
-<p>EXAMPLE – projects done by us.</p>
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <h1 class="reveal">Our Projects</h1>
+  <p class="reveal">
+    This page documents the main projects developed under the NOVA initiative.
+    Each project focuses on research, experimentation, and long-term educational value.
+  </p>
 </section>
 
+<!-- PROJECTS SECTION -->
+<section class="section">
 
-<footer>© 2025 – EXAMPLE</footer>
+  <h2 class="section-title reveal">Active Projects</h2>
 
+  <div class="card-grid">
+
+    <!-- PROJECT 1 -->
+    <div class="card reveal">
+      <i class="fa-solid fa-brain"></i>
+      <h3>AI Research Hub</h3>
+      <p>
+        The AI Research Hub is a long-term project dedicated to exploring artificial
+        intelligence, machine learning models, and their ethical implications.
+      </p>
+      <p>
+        Topics include neural networks, natural language processing, computer vision,
+        and responsible AI deployment.
+      </p>
+      <span class="tag">Research</span>
+      <span class="tag">AI</span>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="card reveal">
+      <i class="fa-solid fa-database"></i>
+      <h3>Global Data Analysis</h3>
+      <p>
+        This project focuses on collecting, cleaning, and analyzing public datasets
+        from global institutions and open-data platforms.
+      </p>
+      <p>
+        The goal is to transform complex datasets into understandable insights using
+        visualization techniques.
+      </p>
+      <span class="tag">Data</span>
+      <span class="tag">Visualization</span>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="card reveal">
+      <i class="fa-solid fa-code"></i>
+      <h3>Open-Source Toolkit</h3>
+      <p>
+        A continuously expanding collection of reusable components, utilities,
+        and templates designed for modern web development.
+      </p>
+      <p>
+        All tools are documented and shared openly to support learning and collaboration.
+      </p>
+      <span class="tag">Open Source</span>
+      <span class="tag">Web</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECOND PROJECT GROUP -->
+<section class="section alt-bg">
+
+  <h2 class="section-title reveal">Experimental Initiatives</h2>
+
+  <div class="card-grid">
+
+    <div class="card reveal">
+      <i class="fa-solid fa-network-wired"></i>
+      <h3>Distributed Systems Lab</h3>
+      <p>
+        An experimental environment for studying distributed systems, scalability,
+        and fault tolerance in modern infrastructures.
+      </p>
+      <p>
+        This initiative focuses on understanding how large-scale systems operate
+        under real-world conditions.
+      </p>
+      <span class="tag">Systems</span>
+    </div>
+
+    <div class="card reveal">
+      <i class="fa-solid fa-palette"></i>
+      <h3>Design Systems Study</h3>
+      <p>
+        A research-driven exploration of design systems, UI consistency, accessibility,
+        and user-centered interfaces.
+      </p>
+      <p>
+        The project combines visual design with practical implementation strategies.
+      </p>
+      <span class="tag">Design</span>
+    </div>
+
+    <div class="card reveal">
+      <i class="fa-solid fa-chart-line"></i>
+      <h3>Trend Analysis Reports</h3>
+      <p>
+        Periodic reports analyzing emerging trends in technology, development tools,
+        and digital workflows.
+      </p>
+      <p>
+        Each report is backed by research and real-world observations.
+      </p>
+      <span class="tag">Analysis</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS SECTION -->
+<section class="section">
+
+  <h2 class="section-title reveal">How Projects Are Built</h2>
+
+  <div class="process-grid">
+
+    <div class="process-step reveal">
+      <span>01</span>
+      <h3>Research</h3>
+      <p>
+        Every project starts with extensive research into existing solutions,
+        academic resources, and industry practices.
+      </p>
+    </div>
+
+    <div class="process-step reveal">
+      <span>02</span>
+      <h3>Experimentation</h3>
+      <p>
+        Ideas are tested through prototypes, small experiments, and iterative builds
+        to validate assumptions.
+      </p>
+    </div>
+
+    <div class="process-step reveal">
+      <span>03</span>
+      <h3>Documentation</h3>
+      <p>
+        All findings, decisions, and results are documented clearly for transparency
+        and educational value.
+      </p>
+    </div>
+
+    <div class="process-step reveal">
+      <span>04</span>
+      <h3>Iteration</h3>
+      <p>
+        Projects are continuously refined based on new insights, feedback,
+        and technological changes.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2 class="reveal">Want to Contribute?</h2>
+  <p class="reveal">
+    We welcome feedback, collaboration ideas, and contributions from developers,
+    designers, and researchers.
+  </p>
+  <a href="contact.html" class="btn-primary reveal">
+    <i class="fa-solid fa-handshake"></i> Contact Us
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h3>NOVA</h3>
+      <p>
+        Building and documenting projects that focus on long-term impact,
+        clarity, and responsible technology.
+      </p>
+    </div>
+
+    <div>
+      <h4>Navigation</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="showcase.html">Showcase</a>
+      <a href="resources.html">Resources</a>
+    </div>
+
+    <div>
+      <h4>Social</h4>
+      <div class="socials">
+        <i class="fa-brands fa-github"></i>
+        <i class="fa-brands fa-x-twitter"></i>
+        <i class="fa-brands fa-discord"></i>
+      </div>
+    </div>
+  </div>
+
+  <p class="copyright">
+    © 2025 NOVA Digital Projects. All rights reserved.
+  </p>
+</footer>
 
 </body>
 </html>
