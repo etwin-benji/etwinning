@@ -1,46 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Project Blog</title>
-<link rel="stylesheet" href="css/style.css" />
-<script defer src="js/animations.js"></script>
-<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOVA — Digital Project Blog</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- JS -->
+  <script defer src="js/main.js"></script>
 </head>
 <body>
 
-
+<!-- NAVBAR -->
 <header class="navbar">
-<h1>Project Blog</h1>
-<nav>
-<a href="about.html">About</a>
-<a href="projects.html">Projects</a>
-<a href="showcase.html">Showcase</a>
-<a href="resources.html">Resources</a>
-<a href="contact.html">Contact</a>
-</nav>
+  <div class="logo">NOVA</div>
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="showcase.html">Showcase</a>
+    <a href="resources.html">Resources</a>
+    <a href="contact.html" class="btn-nav">Contact</a>
+  </nav>
 </header>
 
-
+<!-- HERO -->
 <section class="hero">
-<h2 class="fade">Welcome to Our Project Blog</h2>
-<p class="fade">EXAMPLE – introduction about your team and purpose.</p>
+  <div class="hero-inner">
+    <h1 class="reveal">
+      Building <span>Future-Ready</span><br />
+      Digital Projects
+    </h1>
+    <p class="reveal">
+      NOVA is a modern digital project blog focused on innovation, technology,
+      design systems, and future-oriented research. We document ideas, experiments,
+      and long-term initiatives in a clean, transparent way.
+    </p>
+
+    <div class="hero-actions reveal">
+      <a href="projects.html" class="btn-primary">
+        <i class="fa-solid fa-rocket"></i> View Projects
+      </a>
+      <a href="showcase.html" class="btn-secondary">
+        <i class="fa-solid fa-star"></i> Featured Work
+      </a>
+    </div>
+  </div>
 </section>
 
-
-<section class="cards">
-<h2>Öne Çıkan Projeler</h2>
-<div class="grid">
-<div class="card">EXAMPLE Project 1</div>
-<div class="card">EXAMPLE Project 2</div>
-<div class="card">EXAMPLE Project 3</div>
-</div>
+<!-- STATS -->
+<section class="stats">
+  <div class="stat reveal">
+    <h2>25+</h2>
+    <p>Completed Projects</p>
+  </div>
+  <div class="stat reveal">
+    <h2>4</h2>
+    <p>Main Focus Areas</p>
+  </div>
+  <div class="stat reveal">
+    <h2>1200+</h2>
+    <p>Hours of Research</p>
+  </div>
 </section>
 
+<!-- FEATURED PROJECTS -->
+<section class="section">
+  <h2 class="section-title reveal">Featured Projects</h2>
 
-<footer>© 2025 – EXAMPLE Project Blog</footer>
+  <div class="card-grid">
+    <div class="card reveal">
+      <i class="fa-solid fa-brain"></i>
+      <h3>AI Research Hub</h3>
+      <p>
+        A continuously updated research space exploring artificial intelligence,
+        machine learning models, ethical discussions, and future applications.
+      </p>
+    </div>
 
+    <div class="card reveal">
+      <i class="fa-solid fa-globe"></i>
+      <h3>Global Data Map</h3>
+      <p>
+        An interactive visualization project that analyzes public datasets from
+        different regions and transforms them into readable insights.
+      </p>
+    </div>
+
+    <div class="card reveal">
+      <i class="fa-solid fa-code"></i>
+      <h3>Open-Source Toolkit</h3>
+      <p>
+        A growing collection of reusable components, utilities, and templates
+        designed to speed up modern web development.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline">
+  <h2 class="section-title reveal">Our Journey</h2>
+
+  <div class="timeline-item reveal">
+    <span>2022</span>
+    <p>
+      The NOVA initiative began as a small documentation project focused on
+      experimenting with modern web technologies and design systems.
+    </p>
+  </div>
+
+  <div class="timeline-item reveal">
+    <span>2023</span>
+    <p>
+      Expansion into research-based projects, data analysis, and long-form
+      documentation covering emerging technologies.
+    </p>
+  </div>
+
+  <div class="timeline-item reveal">
+    <span>2024</span>
+    <p>
+      Public launch with a focus on transparency, open collaboration, and
+      high-quality visual presentation.
+    </p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2 class="reveal">Explore. Learn. Build Together.</h2>
+  <p class="reveal">
+    We believe that documentation, design clarity, and shared knowledge are
+    the foundation of long-term innovation.
+  </p>
+  <a href="contact.html" class="btn-primary reveal">
+    <i class="fa-solid fa-envelope"></i> Contact Us
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h3>NOVA</h3>
+      <p>
+        A digital project blog documenting innovation, research, and future-focused
+        ideas through clean design and transparent writing.
+      </p>
+    </div>
+
+    <div>
+      <h4>Navigation</h4>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="showcase.html">Showcase</a>
+      <a href="resources.html">Resources</a>
+    </div>
+
+    <div>
+      <h4>Social</h4>
+      <div class="socials">
+        <i class="fa-brands fa-github"></i>
+        <i class="fa-brands fa-x-twitter"></i>
+        <i class="fa-brands fa-discord"></i>
+      </div>
+    </div>
+  </div>
+
+  <p class="copyright">
+    © 2025 NOVA Digital Projects. All rights reserved.
+  </p>
+</footer>
 
 </body>
 </html>
