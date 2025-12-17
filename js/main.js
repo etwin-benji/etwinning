@@ -26,15 +26,37 @@ window.addEventListener("load", revealOnScroll);
 
 const navbar = document.querySelector(".navbar");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 40) {
-    navbar.style.background = "rgba(15,16,32,0.9)";
-    navbar.style.backdropFilter = "blur(18px)";
-  } else {
-    navbar.style.background = "rgba(15,16,32,0.75)";
-    navbar.style.backdropFilter = "blur(14px)";
-  }
-});
+if (navbar) {
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 40) {
+      navbar.style.background = "rgba(15,16,32,0.9)";
+      navbar.style.backdropFilter = "blur(18px)";
+    } else {
+      navbar.style.background = "rgba(15,16,32,0.75)";
+      navbar.style.backdropFilter = "blur(14px)";
+    }
+  });
+}
+
+/* =========================
+   MOBILE NAV TOGGLE
+========================= */
+
+const navToggle = document.querySelector(".nav-toggle");
+const navLinks = document.querySelector(".nav-links");
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+
+  // Close menu when clicking a link (mobile UX)
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("active");
+    });
+  });
+}
 
 /* =========================
    BUTTON RIPPLE EFFECT
@@ -53,35 +75,37 @@ buttons.forEach((btn) => {
 });
 
 /* =========================
-   CARD HOVER DEPTH
+   CARD HOVER DEPTH (DESKTOP ONLY)
 ========================= */
 
 const cards = document.querySelectorAll(".card, .showcase-card");
 
-cards.forEach((card) => {
-  card.addEventListener("mousemove", (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+if (window.matchMedia("(hover: hover)").matches) {
+  cards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-    const rotateX = (y - centerY) / 25;
-    const rotateY = (centerX - x) / 25;
+      const rotateX = (y - centerY) / 25;
+      const rotateY = (centerX - x) / 25;
 
-    card.style.transform = `
-      perspective(600px)
-      rotateX(${rotateX}deg)
-      rotateY(${rotateY}deg)
-      translateY(-6px)
-    `;
+      card.style.transform = `
+        perspective(600px)
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        translateY(-6px)
+      `;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "translateY(0)";
+    });
   });
-
-  card.addEventListener("mouseleave", () => {
-    card.style.transform = "translateY(0)";
-  });
-});
+}
 
 /* =========================
    METRIC COUNT-UP
@@ -92,14 +116,16 @@ let metricsPlayed = false;
 
 function animateMetrics() {
   metrics.forEach((metric) => {
-    const target = parseInt(metric.innerText);
+    const rawText = metric.innerText;
+    const target = parseInt(rawText);
     let count = 0;
     const increment = Math.ceil(target / 60);
 
     const interval = setInterval(() => {
       count += increment;
       if (count >= target) {
-        metric.innerText = target + (metric.innerText.includes("%") ? "%" : "+");
+        metric.innerText =
+          target + (rawText.includes("+") ? "+" : rawText.includes("%") ? "%" : "");
         clearInterval(interval);
       } else {
         metric.innerText = count;
@@ -110,10 +136,10 @@ function animateMetrics() {
 
 window.addEventListener("scroll", () => {
   const metricsSection = document.querySelector(".metrics-grid");
-  if (!metricsSection) return;
+  if (!metricsSection || metricsPlayed) return;
 
   const sectionTop = metricsSection.getBoundingClientRect().top;
-  if (sectionTop < window.innerHeight - 100 && !metricsPlayed) {
+  if (sectionTop < window.innerHeight - 100) {
     animateMetrics();
     metricsPlayed = true;
   }
@@ -125,8 +151,11 @@ window.addEventListener("scroll", () => {
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
+    const target = document.querySelector(this.getAttribute("href"));
+    if (!target) return;
+
     e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
+    target.scrollIntoView({
       behavior: "smooth",
     });
   });
@@ -143,6 +172,8 @@ if (contactForm) {
     e.preventDefault();
 
     const button = contactForm.querySelector("button");
+    if (!button) return;
+
     button.innerHTML = "✓ Message Sent";
     button.style.background =
       "linear-gradient(135deg, #5ce1e6, #7f8cff)";
