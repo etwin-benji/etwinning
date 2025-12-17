@@ -1,0 +1,87 @@
+* {
+padding: 0;
+box-sizing: border-box;
+font-family: Arial, sans-serif;
+}
+
+
+body {
+background: #0f0f0f;
+color: white;
+}
+
+
+.navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 40px;
+background: #111;
+}
+
+
+.navbar a {
+margin-left: 20px;
+color: #ccc;
+text-decoration: none;
+}
+
+
+.navbar a:hover {
+color: white;
+}
+
+
+.hero {
+text-align: center;
+padding: 120px 20px;
+}
+
+
+.hero h2 {
+font-size: 3rem;
+}
+
+
+.cards {
+padding: 60px 40px;
+}
+
+
+.grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+}
+
+
+.card {
+background: #1c1c1c;
+padding: 40px;
+border-radius: 16px;
+transition: transform 0.3s;
+}
+
+
+.card:hover {
+transform: translateY(-8px);
+}
+
+
+.page {
+padding: 80px 40px;
+max-width: 900px;
+margin: auto;
+}
+
+
+footer {
+text-align: center;
+padding: 30px;
+color: #666;
+}
+
+
+@media (max-width: 600px) {
+.hero h2 { font-size: 2rem; }
+}
