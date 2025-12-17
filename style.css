@@ -2,6 +2,11 @@
    GLOBAL RESET & VARIABLES
 ========================= */
 
+body {
+  background: red !important;
+  color: white !important;
+}
+
 :root {
   --bg-main: #0f1020;
   --bg-alt: #15162e;
