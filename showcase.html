@@ -1,27 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Showcase</title>
-<link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Showcase — NOVA</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- JS -->
+  <script defer src="js/main.js"></script>
 </head>
 <body>
 
-
+<!-- NAVBAR -->
 <header class="navbar">
-<h1>Project Blog</h1>
+  <div class="logo">NOVA</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="showcase.html" class="active">Showcase</a>
+    <a href="resources.html">Resources</a>
+    <a href="contact.html" class="btn-nav">Contact</a>
+  </nav>
 </header>
 
-
-<section class="page">
-<h2>Showcase</h2>
-<p>EXAMPLE – Showcasing stuff.</p>
+<!-- HERO -->
+<section class="page-hero">
+  <h1 class="reveal">Project Showcase</h1>
+  <p class="reveal">
+    A curated visual overview of selected works, experiments, and design explorations
+    developed as part of the NOVA initiative.
+  </p>
 </section>
 
+<!-- SHOWCASE GRID -->
+<section class="section">
 
-<footer>© 2025 – EXAMPLE</footer>
+  <h2 class="section-title reveal">Featured Highlights</h2>
 
+  <div class="showcase-grid">
+
+    <div class="showcase-card reveal">
+      <div class="showcase-image gradient-one"></div>
+      <div class="showcase-content">
+        <h3>AI Interface Concept</h3>
+        <p>
+          A conceptual interface design exploring how users interact with
+          artificial intelligence systems through minimal and intuitive layouts.
+        </p>
+        <span class="tag">UI / UX</span>
+        <span class="tag">AI</span>
+      </div>
+    </div>
+
+    <div class="showcase-card reveal">
+      <div class="showcase-image gradient-two"></div>
+      <div class="showcase-content">
+        <h3>Data Visualization Dashboard</h3>
+        <p>
+          A dashboard prototype designed to translate complex datasets into
+          clear and actionable visual insights.
+        </p>
+        <span class="tag">Data</span>
+        <span class="tag">Dashboard</span>
+      </div>
+    </div>
+
+    <div class="showcase-card reveal">
+      <div class="showcase-image gradient-three"></div>
+      <div class="showcase-content">
+        <h3>Design System Framework</h3>
+        <p>
+          A modular design system focusing on consistency, accessibility,
+          and scalability across digital products.
+        </p>
+        <span class="tag">Design</span>
+        <span class="tag">System</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="section alt-bg">
+
+  <h2 class="section-title reveal">Case Studies</h2>
+
+  <div class="case-study reveal">
+    <h3>Research-Driven Development</h3>
+    <p>
+      This case study documents how research insights directly influenced
+      design and technical decisions throughout a multi-stage project.
+    </p>
+    <p>
+      The focus was on maintaining clarity, reducing complexity, and ensuring
+      that every component served a clear purpose.
+    </p>
+  </div>
+
+  <div class="case-study reveal">
+    <h3>Iterative Design Process</h3>
+    <p>
+      Rather than aiming for immediate perfection, this project evolved through
+      continuous iteration and feedback cycles.
+    </p>
+    <p>
+      Each iteration resulted in measurable improvements in usability and clarity.
+    </p>
+  </div>
+
+</section>
+
+<!-- METRICS -->
+<section class="section">
+
+  <h2 class="section-title reveal">Project Metrics</h2>
+
+  <div class="metrics-grid">
+
+    <div class="metric reveal">
+      <h3>25+</h3>
+      <p>Documented Experiments</p>
+    </div>
+
+    <div class="metric reveal">
+      <h3>10+</h3>
+      <p>Research Reports</p>
+    </div>
+
+    <div class="metric reveal">
+      <h3>5</h3>
+      <p>Core Systems Built</p>
+    </div>
+
+    <div class="metric reveal">
+      <h3>100%</h3>
+      <p>Open Documentation</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2 class="reveal">Explore More Projects</h2>
+  <p class="reveal">
+    Visit the projects section to explore detailed documentation
+    and ongoing development efforts.
+  </p>
+  <a href="projects.html" class="btn-primary reveal">
+    <i class="fa-solid fa-arrow-right"></i> View Projects
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h3>NOVA</h3>
+      <p>
+        Showcasing thoughtful design, structured research,
+        and long-term digital experimentation.
+      </p>
+    </div>
+
+    <div>
+      <h4>Navigation</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="resources.html">Resources</a>
+    </div>
+
+    <div>
+      <h4>Social</h4>
+      <div class="socials">
+        <i class="fa-brands fa-github"></i>
+        <i class="fa-brands fa-x-twitter"></i>
+        <i class="fa-brands fa-discord"></i>
+      </div>
+    </div>
+  </div>
+
+  <p class="copyright">
+    © 2025 NOVA Digital Projects. All rights reserved.
+  </p>
+</footer>
 
 </body>
 </html>
