@@ -35,6 +35,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Prevent text overflow */
+p, h1, h2, h3, h4, li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 /* =========================
    TYPOGRAPHY
 ========================= */
@@ -94,18 +100,18 @@ a {
   -webkit-text-fill-color: transparent;
 }
 
-.navbar nav {
+.nav-links {
   display: flex;
   gap: 1.8rem;
 }
 
-.navbar nav a {
+.nav-links a {
   font-weight: 500;
   position: relative;
   transition: var(--transition);
 }
 
-.navbar nav a::after {
+.nav-links a::after {
   content: "";
   position: absolute;
   width: 0;
@@ -116,8 +122,8 @@ a {
   transition: var(--transition);
 }
 
-.navbar nav a:hover::after,
-.navbar nav a.active::after {
+.nav-links a:hover::after,
+.nav-links a.active::after {
   width: 100%;
 }
 
@@ -127,6 +133,13 @@ a {
   background: var(--gradient);
   color: #000;
   font-weight: 700;
+}
+
+/* Mobile toggle */
+.nav-toggle {
+  display: none;
+  font-size: 1.6rem;
+  cursor: pointer;
 }
 
 /* =========================
@@ -153,12 +166,12 @@ a {
   padding: 5rem 6%;
 }
 
-.alt-bg {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.03),
-    transparent
-  );
+.section,
+.page-content,
+.cta,
+footer {
+  max-width: 1400px;
+  margin-inline: auto;
 }
 
 .section-title {
@@ -199,39 +212,6 @@ a {
 }
 
 /* =========================
-   TAGS
-========================= */
-
-.tag {
-  display: inline-block;
-  margin-top: 0.8rem;
-  margin-right: 0.4rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-/* =========================
-   PROCESS
-========================= */
-
-.process-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-}
-
-.process-step span {
-  font-size: 2.4rem;
-  font-weight: 900;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* =========================
    SHOWCASE
 ========================= */
 
@@ -253,40 +233,6 @@ a {
   min-height: 240px;
 }
 
-.gradient-one {
-  background: linear-gradient(135deg, #7f8cff, #5ce1e6);
-}
-
-.gradient-two {
-  background: linear-gradient(135deg, #ff7ad9, #ffc371);
-}
-
-.gradient-three {
-  background: linear-gradient(135deg, #5f72ff, #9b23ea);
-}
-
-.showcase-content {
-  padding: 2rem;
-}
-
-/* =========================
-   METRICS
-========================= */
-
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 2rem;
-  text-align: center;
-}
-
-.metric h3 {
-  font-size: 2.4rem;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 /* =========================
    CTA
 ========================= */
@@ -294,11 +240,6 @@ a {
 .cta {
   text-align: center;
   padding: 6rem 6%;
-  background: linear-gradient(
-    180deg,
-    rgba(127, 140, 255, 0.12),
-    transparent
-  );
 }
 
 .btn-primary {
@@ -333,10 +274,6 @@ footer {
   gap: 2.5rem;
 }
 
-.footer-grid h4 {
-  margin-bottom: 1rem;
-}
-
 .footer-grid a {
   display: block;
   margin-bottom: 0.4rem;
@@ -348,29 +285,11 @@ footer {
   font-size: 1.3rem;
 }
 
-copyright {
+.copyright {
   text-align: center;
-}
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 3rem;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 0.9rem;
-  margin-top: 0.4rem;
-  border-radius: 10px;
-  border: none;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
 }
 
 /* =========================
@@ -393,11 +312,32 @@ copyright {
 ========================= */
 
 @media (max-width: 768px) {
-  .navbar nav {
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 16, 32, 0.95);
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 2rem;
     display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
   }
 
   .showcase-card {
     grid-template-columns: 1fr;
+  }
+
+  .page-hero {
+    padding-top: 5rem;
   }
 }
