@@ -366,3 +366,45 @@ footer {
     padding-top: 5rem;
   }
 }
+
+/* ==================================================
+   ADDED FIXES — DO NOT REMOVE (minimal & safe)
+   Fixes:
+   - text touching edges
+   - rare horizontal overflow
+   - navbar breaking on some pages
+================================================== */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Safety padding so text never hugs screen edges */
+.section,
+.hero,
+.page-hero,
+.cta,
+footer {
+  padding-left: max(1rem, 4%);
+  padding-right: max(1rem, 4%);
+}
+
+/* Navbar width safety across pages */
+.navbar {
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Mobile-specific edge safety */
+@media (max-width: 768px) {
+  .section,
+  .hero,
+  .page-hero,
+  .cta,
+  footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
