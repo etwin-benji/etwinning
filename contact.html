@@ -24,7 +24,14 @@
 <!-- NAVBAR -->
 <header class="navbar">
   <div class="logo">NOVA</div>
-  <nav>
+
+  <!-- MOBILE TOGGLE (ADDED) -->
+  <div class="nav-toggle">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+
+  <!-- NAV LINKS (CLASS FIXED) -->
+  <nav class="nav-links">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="projects.html">Projects</a>
@@ -38,7 +45,7 @@
 <section class="page-hero">
   <h1 class="reveal">Contact Us</h1>
   <p class="reveal">
-    Have a question, collaboration idea, or feedback?  
+    Have a question, collaboration idea, or feedback?<br>
     Reach out — we read every message carefully.
   </p>
 </section>
@@ -78,29 +85,41 @@
       </div>
     </div>
 
-    <!-- FORM -->
-    <form class="contact-form reveal">
+    <!-- FORM (UPGRADED STRUCTURE) -->
+    <form class="contact-form card reveal">
       <h2>Send a Message</h2>
 
-      <label>
-        Full Name
-        <input type="text" placeholder="Your name" required>
-      </label>
+      <div class="form-group">
+        <label>Full Name</label>
+        <div class="input-wrap">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" placeholder="Your name" required>
+        </div>
+      </div>
 
-      <label>
-        Email Address
-        <input type="email" placeholder="you@example.com" required>
-      </label>
+      <div class="form-group">
+        <label>Email Address</label>
+        <div class="input-wrap">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" placeholder="you@example.com" required>
+        </div>
+      </div>
 
-      <label>
-        Subject
-        <input type="text" placeholder="Project inquiry / Feedback / Other">
-      </label>
+      <div class="form-group">
+        <label>Subject</label>
+        <div class="input-wrap">
+          <i class="fa-solid fa-tag"></i>
+          <input type="text" placeholder="Project inquiry / Feedback / Other">
+        </div>
+      </div>
 
-      <label>
-        Message
-        <textarea rows="6" placeholder="Write your message here..." required></textarea>
-      </label>
+      <div class="form-group">
+        <label>Message</label>
+        <div class="input-wrap textarea-wrap">
+          <i class="fa-solid fa-pen"></i>
+          <textarea rows="6" placeholder="Write your message here..." required></textarea>
+        </div>
+      </div>
 
       <button type="submit" class="btn-primary">
         <i class="fa-solid fa-paper-plane"></i> Send Message
@@ -183,3 +202,4 @@
 
 </body>
 </html>
+
