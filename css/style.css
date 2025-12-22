@@ -413,17 +413,6 @@ footer {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-wrap: wrap; /* prevents overflow on mobile */
-}
-
-.address-text {
-  flex: 1;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
 }
 
 .address-text {
@@ -442,4 +431,3 @@ footer {
   font-weight: 600;
   white-space: nowrap;
 }
-
