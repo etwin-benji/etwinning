@@ -521,4 +521,8 @@ footer {
     z-index: 1000;
     opacity: 1;
 }
+.corner-euro {
+    opacity: 1;
+    filter: contrast(3) brightness(1.4);
+}
 
