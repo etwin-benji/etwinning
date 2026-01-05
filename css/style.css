@@ -511,3 +511,14 @@ footer {
   color: #9aa4c7;
   text-align: center;
 }
+
+.corner-euro {
+    position: fixed;
+    top: 20px;        /* not super corner */
+    right: 20px;      /* clean spacing */
+    width: 48px;      /* adjust if needed */
+    height: auto;
+    z-index: 1000;
+    opacity: 0.9;
+}
+
