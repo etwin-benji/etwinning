@@ -32,8 +32,8 @@ body {
 
   background:
     linear-gradient(
-      rgba(15, 16, 32, 0.8),
-      rgba(15, 16, 32, 0.8)
+      rgba(15, 16, 32, 0.7),
+      rgba(15, 16, 32, 0.7)
     ),
     url("../assets/bg-left.png"),
     url("../assets/bg-right.png"),
