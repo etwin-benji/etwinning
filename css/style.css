@@ -433,7 +433,7 @@ footer {
    @media (max-width: 768px) {
   .corner-euro {
     top: 50%;
-    left: 95px;
+    left: 130px;
     transform: translateY(-50%);
     width: 40px;
     opacity: 0.95;
