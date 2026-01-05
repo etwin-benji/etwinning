@@ -142,7 +142,7 @@ a {
 .corner-euro {
     position: absolute;
     top: 20px;
-    left: 100px;
+    left: 20px;
     width: 60px;
     z-index: 2147483647;
     opacity: 1;
