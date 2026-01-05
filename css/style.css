@@ -513,16 +513,21 @@ footer {
 }
 
 .corner-euro {
-    position: fixed;
-    top: 20px;        /* not super corner */
-    left: 20px;      /* clean spacing */
-    width: 60px;      /* adjust if needed */
-    height: auto;
-    z-index: 9999;
+    position: fixed !important;
+    top: 20px;
+    left: 20px;
+    width: 60px;
+    z-index: 2147483647;
     opacity: 1;
+    pointer-events: none; /* optional */
 }
+
 .corner-euro {
     opacity: 1;
     filter: contrast(3) brightness(1.4);
 }
 
+html, body {
+    transform: none !important;
+    filter: none !important;
+}
