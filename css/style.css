@@ -35,6 +35,48 @@ body {
   overflow-x: hidden;
 }
 
+/* ==================================================
+   GLOBAL DUAL BACKGROUND (ALL PAGES)
+   Safe, clean, non-breaking
+================================================== */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    linear-gradient(
+      rgba(15, 16, 32, 0.78),
+      rgba(15, 16, 32, 0.78)
+    ),
+    url("./assets/bg-left.jpg"),
+    url("./assets/bg-right.jpg");
+
+  background-size: cover, cover;
+  background-position: left center, right center;
+  background-repeat: no-repeat;
+
+  pointer-events: none;
+}
+
+/* Subtle color harmony layer (matches your accent) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  background: radial-gradient(
+    circle at top,
+    rgba(127, 140, 255, 0.12),
+    transparent 65%
+  );
+
+  pointer-events: none;
+}
+
 /* Prevent text touching edges or overflowing */
 p,
 h1,
@@ -364,6 +406,19 @@ footer {
 
   .page-hero {
     padding-top: 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body::before {
+    background:
+      linear-gradient(
+        rgba(15, 16, 32, 0.88),
+        rgba(15, 16, 32, 0.88)
+      ),
+      url("./assets/bg-left.jpg");
+
+    background-position: center;
   }
 }
 
