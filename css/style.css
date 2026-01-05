@@ -568,7 +568,7 @@ footer {
 }
 
 .corner-euro {
-    position: fixed !important;
+    position: sticky !important;
     top: 20px;
     left: 20px;
     width: 60px;
