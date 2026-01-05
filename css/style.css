@@ -139,6 +139,21 @@ a {
   border-bottom: 1px solid var(--glass-border);
 }
 
+.corner-euro {
+    position: sticky !important;
+    top: 20px;
+    left: 20px;
+    width: 60px;
+    z-index: 2147483647;
+    opacity: 1;
+    pointer-events: none; /* optional */
+}
+
+.corner-euro {
+    opacity: 1;
+    filter: contrast(3) brightness(1.4);
+}
+
 .logo {
   font-size: 1.6rem;
   font-weight: 900;
@@ -567,22 +582,4 @@ footer {
   text-align: center;
 }
 
-.corner-euro {
-    position: sticky !important;
-    top: 20px;
-    left: 20px;
-    width: 60px;
-    z-index: 2147483647;
-    opacity: 1;
-    pointer-events: none; /* optional */
-}
 
-.corner-euro {
-    opacity: 1;
-    filter: contrast(3) brightness(1.4);
-}
-
-html, body {
-    transform: none !important;
-    filter: none !important;
-}
