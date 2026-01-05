@@ -39,16 +39,27 @@ body {
     url("../assets/bg-right.png"),
     radial-gradient(circle at top, #1b1c3b, var(--bg-main));
 
-  background-size: cover, cover, cover, cover;
-  background-position: left center, right center, center, center;
-  background-repeat: no-repeat;
+  /* 👇 THIS IS THE IMPORTANT PART */
+  background-size:
+    cover,
+    50% 100%,
+    50% 100%,
+    cover;
 
+  background-position:
+    center,
+    left center,
+    right center,
+    center;
+
+  background-repeat: no-repeat;
   background-attachment: fixed;
 
   color: var(--text-main);
   line-height: 1.7;
   overflow-x: hidden;
 }
+
 
 
 /* ==================================================
