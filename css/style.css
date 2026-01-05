@@ -433,7 +433,7 @@ footer {
    @media (max-width: 768px) {
   .corner-euro {
     top: 50%;
-    left: 20px;
+    left: 80px;
     transform: translateY(-50%);
     width: 40px;
     opacity: 0.95;
@@ -466,15 +466,28 @@ footer {
   body {
     background:
       linear-gradient(
-        rgba(15, 16, 32, 0.7),
-        rgba(15, 16, 32, 0.7)
+        rgba(15, 16, 32, 0.65),
+        rgba(15, 16, 32, 0.75)
       ),
       url("../assets/bg-left.png"),
       radial-gradient(circle at top, #1b1c3b, var(--bg-main));
 
-    background-position: center;
+    background-size:
+      cover,
+      cover,
+      cover;
+
+    background-position:
+      center,
+      center top,
+      center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: scroll; /* VERY important for mobile quality */
   }
 }
+
 
 /* ==================================================
    ADDED FIXES — DO NOT REMOVE (minimal & safe)
