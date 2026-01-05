@@ -430,6 +430,15 @@ footer {
     display: none;
   }
 
+   @media (max-width: 768px) {
+  .corner-euro {
+    top: 70px;          /* move below navbar */
+    left: 12px;
+    width: 42px;        /* smaller on phone */
+    opacity: 0.9;
+  }
+}
+
   .nav-links.active {
     display: flex;
   }
@@ -455,8 +464,8 @@ footer {
   body {
     background:
       linear-gradient(
-        rgba(15, 16, 32, 0.9),
-        rgba(15, 16, 32, 0.9)
+        rgba(15, 16, 32, 0.7),
+        rgba(15, 16, 32, 0.7)
       ),
       url("../assets/bg-left.png"),
       radial-gradient(circle at top, #1b1c3b, var(--bg-main));
