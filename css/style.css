@@ -518,7 +518,7 @@ footer {
     left: 20px;      /* clean spacing */
     width: 60px;      /* adjust if needed */
     height: auto;
-    z-index: 1000;
+    z-index: 9999;
     opacity: 1;
 }
 .corner-euro {
