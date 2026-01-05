@@ -432,12 +432,14 @@ footer {
 
    @media (max-width: 768px) {
   .corner-euro {
-    top: 70px;          /* move below navbar */
-    left: 12px;
-    width: 42px;        /* smaller on phone */
-    opacity: 0.9;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    width: 40px;
+    opacity: 0.95;
   }
 }
+
 
   .nav-links.active {
     display: flex;
