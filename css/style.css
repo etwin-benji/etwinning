@@ -29,11 +29,27 @@ html {
 
 body {
   font-family: "Inter", sans-serif;
-  background: trasnsparent;
+
+  background:
+    linear-gradient(
+      rgba(15, 16, 32, 0.8),
+      rgba(15, 16, 32, 0.8)
+    ),
+    url("../assets/bg-left.png"),
+    url("../assets/bg-right.png"),
+    radial-gradient(circle at top, #1b1c3b, var(--bg-main));
+
+  background-size: cover, cover, cover, cover;
+  background-position: left center, right center, center, center;
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
+
   color: var(--text-main);
   line-height: 1.7;
   overflow-x: hidden;
 }
+
 
 /* ==================================================
    GLOBAL DUAL BACKGROUND (ALL PAGES)
@@ -425,13 +441,14 @@ footer {
 }
 
 @media (max-width: 768px) {
-  body::before {
+  body {
     background:
       linear-gradient(
-        rgba(15, 16, 32, 0.88),
-        rgba(15, 16, 32, 0.88)
+        rgba(15, 16, 32, 0.9),
+        rgba(15, 16, 32, 0.9)
       ),
-      url("./assets/bg-left.jpg");
+      url("../assets/bg-left.png"),
+      radial-gradient(circle at top, #1b1c3b, var(--bg-main));
 
     background-position: center;
   }
