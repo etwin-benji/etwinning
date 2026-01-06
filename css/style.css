@@ -1,34 +1,40 @@
 /* =========================
    GLOBAL RESET & VARIABLES
-   (Lightened theme — clearly using your requested colors:
+   (Light theme using your requested colors:
     main = #8CA9FF (60% role), accent = #FFF2C6 (40% role))
+   Adjusted: slightly bolder typography, navbar forced light on scroll,
+   background images keep their aspect ratio and become more visible.
 ========================= */
 
 :root {
-  /* Core palette (explicit values you asked for plus tuned tones) */
+  /* Core palette */
   --main: #8CA9FF;           /* primary (60% of UI roles) */
   --main-dark: #5F86D9;      /* stronger blue for emphasis */
   --accent: #FFF2C6;         /* secondary (40% of UI roles) */
   --accent-deep: #E6D79C;    /* slightly richer warm for contrast */
 
-  /* Light, airy backgrounds so the site isn't dark */
+  /* Light, airy backgrounds */
   --bg-main: #F7FBFF;        /* very light blue / paper */
   --bg-alt: #F3F7FF;         /* subtle variation for radial */
-  --card-bg: rgba(255, 255, 255, 0.96); /* near-white cards for clarity */
 
-  /* Glass / border tokens keep a hint of the main hue */
+  /* Card / glass tokens */
+  --card-bg: rgba(255, 255, 255, 0.96);
   --glass-border: rgba(140, 169, 255, 0.18);
-  --glass-border-strong: rgba(140,169,255,0.24);
+  --glass-border-strong: rgba(140, 169, 255, 0.24);
 
-  /* Typography (dark on light backgrounds for good contrast) */
+  /* Typography & weights */
+  --font-family-base: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-weight-base: 500;   /* slightly thicker body copy */
+  --font-weight-heading: 800; /* stronger headings but still professional */
+
   --text-main: #07203a;      /* dark navy for primary copy (high contrast) */
-  --text-muted: rgba(7, 32, 58, 0.68); /* muted but legible */
+  --text-muted: rgba(7, 32, 58, 0.68);
   --text-muted-soft: rgba(7,32,58,0.48);
 
   --gradient: linear-gradient(135deg, var(--main), var(--accent));
   --radius: 18px;
   --transition: all 0.35s ease;
-  --shadow: 0 18px 36px rgba(7, 32, 58, 0.08);
+  --shadow: 0 18px 36px rgba(7, 32, 58, 0.06);
 }
 
 /* Preserve layout resets */
@@ -36,29 +42,44 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-family-base);
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-base); /* slightly bolder overall */
+  line-height: 1.7;
+  color: var(--text-main);
+  overflow-x: hidden;
 
+  /*
+    Background layers:
+    1) subtle color wash (kept very light so photos show through)
+    2) left side image
+    3) right side image
+    4) radial gradient for soft vignette
+    Use auto 100% for side images to preserve aspect ratio (no stretch).
+  */
   background:
     linear-gradient(
-      rgba(140,169,255,0.14),
+      rgba(140,169,255,0.04),
       rgba(255,242,198,0.02)
     ),
     url("../assets/bg-left.png"),
     url("../assets/bg-right.png"),
     radial-gradient(circle at top, var(--bg-alt), var(--bg-main));
 
-  /* IMPORTANT — keep original background sizing/positions */
   background-size:
     cover,
-    50% 100%,
-    50% 100%,
+    auto 100%,
+    auto 100%,
     cover;
 
   background-position:
@@ -69,13 +90,14 @@ body {
 
   background-repeat: no-repeat;
   background-attachment: fixed;
-
-  color: var(--text-main);
-  line-height: 1.7;
-  overflow-x: hidden;
 }
 
-/* GLOBAL DUAL BACKGROUND (ALL PAGES) */
+/* ==================================================
+   GLOBAL DUAL BACKGROUND (ALL PAGES)
+   - keep image aspect ratio (auto 100%)
+   - lower overlay opacity so photos are more visible
+================================================== */
+
 body::before {
   content: "";
   position: fixed;
@@ -84,20 +106,21 @@ body::before {
 
   background:
     linear-gradient(
-      rgba(247,251,255,0.55),
-      rgba(247,251,255,0.55)
+      rgba(255,255,255,0.18),   /* light veil but not overpowering */
+      rgba(255,255,255,0.12)
     ),
     url("./assets/bg-left.png"),
     url("./assets/bg-right.png");
 
-  background-size: cover, cover;
-  background-position: left center, right center;
+  /* keep the side images' height = 100% and width auto so they don't stretch */
+  background-size: cover, auto 100%, auto 100%;
+  background-position: left center, left center, right center;
   background-repeat: no-repeat;
 
   pointer-events: none;
 }
 
-/* Subtle color harmony layer (keeps soft blue glow from primary) */
+/* Subtle color harmony layer (soft glow from primary) */
 body::after {
   content: "";
   position: fixed;
@@ -106,7 +129,7 @@ body::after {
 
   background: radial-gradient(
     circle at top,
-    rgba(140, 169, 255, 0.12),
+    rgba(140, 169, 255, 0.08),
     transparent 65%
   );
 
@@ -124,12 +147,17 @@ li {
   word-break: normal;
 }
 
-/* TYPOGRAPHY */
+/* =========================
+   TYPOGRAPHY
+   - headings slightly thicker
+   - body slightly thicker for better legibility
+========================= */
+
 h1,
 h2,
 h3,
 h4 {
-  font-weight: 800;
+  font-weight: var(--font-weight-heading);
   letter-spacing: -0.5px;
   color: var(--text-main);
 }
@@ -151,6 +179,7 @@ p {
   font-size: 1rem;
 }
 
+/* links use primary by default */
 a {
   color: var(--main);
   text-decoration: none;
@@ -160,7 +189,12 @@ a:hover, a:focus {
   color: var(--accent-deep);
 }
 
-/* NAVBAR */
+/* =========================
+   NAVBAR
+   - force light appearance even if JS toggles classes on scroll
+   - keep it visually consistent and readable
+========================= */
+
 .navbar {
   position: sticky;
   top: 0;
@@ -169,10 +203,20 @@ a:hover, a:focus {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 6%;
-  background: rgba(255,255,255,0.80);
+  background: rgba(255,255,255,0.94) !important; /* force light */
+  color: var(--text-main) !important;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--glass-border);
-  color: var(--text-main);
+  transition: background 0.18s ease !important;
+}
+
+/* Common "scrolled" / "solid" class names that some JS add: ensure they remain light */
+.navbar.scrolled,
+.navbar.solid,
+.navbar.dark {
+  background: rgba(255,255,255,0.94) !important;
+  color: var(--text-main) !important;
+  border-bottom-color: var(--glass-border-strong) !important;
 }
 
 .corner-euro {
@@ -200,7 +244,7 @@ a:hover, a:focus {
 }
 
 .nav-links a {
-  font-weight: 600;
+  font-weight: 700;
   position: relative;
   transition: var(--transition);
   color: var(--text-muted);
@@ -227,7 +271,7 @@ a:hover, a:focus {
   border-radius: 999px;
   background: var(--gradient);
   color: var(--text-main);
-  font-weight: 700;
+  font-weight: 800;
   box-shadow: 0 8px 20px rgba(92,126,220,0.08);
 }
 
@@ -237,7 +281,10 @@ a:hover, a:focus {
   cursor: pointer;
 }
 
-/* HERO */
+/* =========================
+   HERO (INDEX PAGE)
+========================= */
+
 .hero {
   padding: 7rem 6% 5rem;
 }
@@ -248,7 +295,10 @@ a:hover, a:focus {
   padding-inline: 1.5rem;
 }
 
-/* PAGE HERO */
+/* =========================
+   PAGE HERO (OTHER PAGES)
+========================= */
+
 .page-hero {
   padding: 7rem 6% 4rem;
   text-align: center;
@@ -261,7 +311,10 @@ a:hover, a:focus {
   font-size: 1.1rem;
 }
 
-/* SECTIONS & LAYOUT */
+/* =========================
+   SECTIONS & LAYOUT
+========================= */
+
 .section {
   padding: 5rem 6%;
 }
@@ -279,7 +332,10 @@ footer {
   margin-bottom: 3.5rem;
 }
 
-/* CARDS & GRIDS */
+/* =========================
+   CARDS & GRIDS
+========================= */
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -295,6 +351,7 @@ footer {
   box-shadow: var(--shadow);
   transition: var(--transition);
   color: var(--text-main);
+  font-weight: var(--font-weight-base);
 }
 
 .card:hover {
@@ -309,7 +366,10 @@ footer {
   -webkit-text-fill-color: transparent;
 }
 
-/* SHOWCASE */
+/* =========================
+   SHOWCASE
+========================= */
+
 .showcase-grid {
   display: grid;
   gap: 2.5rem;
@@ -327,9 +387,22 @@ footer {
 
 .showcase-image {
   min-height: 240px;
+  /* Keep images inside placeholders from stretching:
+     use background-size: cover on the image container,
+     and ensure img elements use object-fit where applicable. */
 }
 
-/* CTA */
+.showcase-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* prevents stretching, maintains aspect ratio */
+  display: block;
+}
+
+/* =========================
+   CTA
+========================= */
+
 .cta {
   text-align: center;
   padding: 6rem 6%;
@@ -354,7 +427,10 @@ footer {
   box-shadow: 0 14px 36px rgba(95,134,217,0.12);
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
+
 footer {
   padding: 4rem 6% 2rem;
   border-top: 1px solid var(--glass-border);
@@ -386,7 +462,10 @@ footer {
   color: var(--text-muted-soft);
 }
 
-/* ANIMATIONS */
+/* =========================
+   ANIMATIONS
+========================= */
+
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -398,7 +477,11 @@ footer {
   transition: 0.8s ease;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+   - side images keep aspect ratio (centered), smaller veil so they show through
+========================= */
+
 @media (max-width: 768px) {
   .nav-toggle {
     display: block;
@@ -445,21 +528,20 @@ footer {
   .page-hero {
     padding-top: 5rem;
   }
-}
 
-@media (max-width: 768px) {
   body {
+    /* Mobile: keep photos visible but avoid stretching */
     background:
       linear-gradient(
-        rgba(140,169,255,0.10),
-        rgba(255,242,198,0.03)
+        rgba(140,169,255,0.03),
+        rgba(255,242,198,0.01)
       ),
       url("../assets/bg-left.png"),
       radial-gradient(circle at top, var(--bg-alt), var(--bg-main));
 
     background-size:
       cover,
-      cover,
+      auto 60%, /* let mobile side image be smaller and auto-scaled */
       cover;
 
     background-position:
@@ -469,17 +551,21 @@ footer {
 
     background-repeat: no-repeat;
 
-    background-attachment: scroll; /* mobile-friendly */
+    background-attachment: scroll; /* mobile friendly */
   }
 }
 
-/* ADDED FIXES — DO NOT REMOVE */
+/* ==================================================
+   ADDED FIXES — DO NOT REMOVE (minimal & safe)
+================================================== */
+
 html,
 body {
   max-width: 100%;
   overflow-x: hidden;
 }
 
+/* Safety padding so text never hugs screen edges */
 .section,
 .hero,
 .page-hero,
@@ -489,6 +575,7 @@ footer {
   padding-right: max(1rem, 4%);
 }
 
+/* Navbar width safety across pages */
 .navbar {
   width: 100%;
   max-width: 100vw;
@@ -506,7 +593,8 @@ footer {
   }
 }
 
-/* CONTACT & FORMS (colors tuned for light background & contrast) */
+/* CONTACT & FORMS */
+
 .contact-item {
   display: flex;
   align-items: center;
@@ -526,7 +614,7 @@ footer {
   text-decoration: none !important;
   border-radius: 6px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
   box-shadow: 0 8px 18px rgba(92,126,220,0.08);
 }
@@ -589,14 +677,13 @@ footer {
   box-shadow: 0 0 0 4px rgba(140,169,255,0.12);
 }
 
-/* Primary button tuned to gradient; dark text keeps accessibility on light backgrounds */
 .btn-primary {
   width: 100%;
   margin-top: 10px;
   padding: 14px;
   border-radius: 14px;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 800;
   background: linear-gradient(135deg, var(--main), var(--accent));
   color: var(--text-main);
   border: none;
