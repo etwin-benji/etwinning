@@ -84,8 +84,8 @@ body::before {
 
   background:
     linear-gradient(
-      rgba(247,251,255,0.65),
-      rgba(247,251,255,0.65)
+      rgba(247,251,255,0.55),
+      rgba(247,251,255,0.55)
     ),
     url("./assets/bg-left.png"),
     url("./assets/bg-right.png");
