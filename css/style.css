@@ -372,16 +372,12 @@ footer {
 }
 
 .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 2rem;
-  padding: 0.9rem 1.6rem;
-  border-radius: 999px;
-  background: var(--gradient);
-  color: #000;
-  font-weight: 800;
-  transition: var(--transition);
+  background: linear-gradient(
+    135deg,
+    #8CA9FF,
+    #FFF2C6
+  );
+  color: #0f1225;
 }
 
 .btn-primary:hover {
