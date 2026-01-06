@@ -40,14 +40,15 @@ html {
 body {
   font-family: "Inter", sans-serif;
 
-  background:
-    linear-gradient(
-      rgba(15, 16, 32, 0.7),
-      rgba(15, 16, 32, 0.7)
-    ),
-    url("../assets/bg-left.png"),
-    url("../assets/bg-right.png"),
-    radial-gradient(circle at top, #1b1c3b, var(--bg-main));
+   background:
+  linear-gradient(
+    rgba(18, 26, 20, 0.55),
+    rgba(18, 26, 20, 0.65)
+  ),
+  url("../assets/bg-left.png"),
+  url("../assets/bg-right.png"),
+  radial-gradient(circle at top, #1f3326, var(--bg-main));
+
 
   /* 👇 THIS IS THE IMPORTANT PART */
   background-size:
