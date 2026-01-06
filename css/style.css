@@ -220,10 +220,12 @@ a {
   gap: 1.8rem;
 }
 
-.nav-links a {
-  font-weight: 500;
-  position: relative;
-  transition: var(--transition);
+.nav-links a::after {
+  background: var(--gradient);
+}
+
+.nav-links a.active {
+  color: var(--accent);
 }
 
 .nav-links a::after {
@@ -333,12 +335,10 @@ footer {
 }
 
 .card i {
-  font-size: 2rem;
-  margin-bottom: 1.2rem;
   background: var(--gradient);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
+
 
 /* =========================
    SHOWCASE
