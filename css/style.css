@@ -3,19 +3,29 @@
 ========================= */
 
 :root {
-  --bg-main: #0f1020;
-  --bg-alt: #15162e;
-  --card-bg: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.12);
+  --bg-main: #121a14;        /* deep forest green */
+  --bg-alt: #1b2a21;         /* darker olive */
+  
+  --card-bg: rgba(255, 255, 255, 0.10);
+  --glass-border: rgba(255, 255, 255, 0.18);
+
   --text-main: #ffffff;
-  --text-muted: #b8b8d4;
-  --accent: #7f8cff;
-  --accent-alt: #5ce1e6;
-  --gradient: linear-gradient(135deg, #7f8cff, #5ce1e6);
+  --text-muted: #d1d5c9;
+
+  --accent: #f4c430;         /* NatGeo yellow */
+  --accent-alt: #3bb273;     /* nature green */
+
+  --gradient: linear-gradient(
+    135deg,
+    #f4c430,
+    #3bb273
+  );
+
   --radius: 18px;
   --transition: all 0.35s ease;
   --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
+
 
 * {
   margin: 0;
