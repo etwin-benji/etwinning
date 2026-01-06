@@ -3,23 +3,30 @@
 ========================= */
 
 :root {
-  --bg-main: #121a14;        /* deep forest green */
-  --bg-alt: #1b2a21;         /* darker olive */
-  
-  --card-bg: rgba(255, 255, 255, 0.10);
-  --glass-border: rgba(255, 255, 255, 0.18);
+  --bg-main: #111527;
+  --bg-alt: #161b35;
+
+  --card-bg: rgba(255, 255, 255, 0.14);
+  --glass-border: rgba(255, 255, 255, 0.22);
 
   --text-main: #ffffff;
-  --text-muted: #d1d5c9;
+  --text-muted: rgba(255, 255, 255, 0.82);
 
-  --accent: #f4c430;         /* NatGeo yellow */
-  --accent-alt: #3bb273;     /* nature green */
+  /* 👇 MAIN COLORS (ORDERED BY POWER) */
+  --accent: #8CA9FF;        /* PRIMARY – dominant */
+  --accent-alt: #FFF2C6;    /* SECONDARY – soft highlight */
 
   --gradient: linear-gradient(
     135deg,
-    #f4c430,
-    #3bb273
+    #8CA9FF 0%,
+    #FFF2C6 100%
   );
+
+  --radius: 18px;
+  --transition: all 0.35s ease;
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
 
   --radius: 18px;
   --transition: all 0.35s ease;
