@@ -3,20 +3,28 @@
 ========================= */
 
 :root {
-  --bg-main: #8CA9FF;
-  --bg-alt: #8CA9FF;
-  --card-bg: rgba(140, 169, 255, 0.06);
-  --glass-border: rgba(140, 169, 255, 0.12);
-  --text-main: #8CA9FF;
-  --text-muted: #FFF2C6;
-  --accent: #8CA9FF;
-  --accent-alt: #FFF2C6;
-  --gradient: linear-gradient(135deg, #8CA9FF, #FFF2C6);
+  /* Palette (vibe: cool blue + warm cream, tuned for contrast) */
+  --main: #7FA9FF;           /* refined primary blue (inspired by 8CA9FF) */
+  --main-dark: #5F86D9;      /* darker blue for emphasis */
+  --accent: #FFF1B8;         /* refined warm cream (inspired by FFF2C6) */
+  --accent-soft: #FFF8E6;    /* very light warm accent */
+
+  /* Backgrounds (deep, bluish night tones for contrast) */
+  --bg-main: #0b1228;        /* deep navy */
+  --bg-alt: #0f1630;         /* slightly lighter navy */
+
+  /* UI tokens derived from palette */
+  --card-bg: rgba(127, 169, 255, 0.06);       /* subtle blue-tinted card overlay */
+  --glass-border: rgba(127, 169, 255, 0.12);  /* glassy border from primary */
+  --text-main: #F8FAFF;                       /* near-white with slight cool tint */
+  --text-muted: #F6EFC8;                      /* warm muted text (secondary) */
+  --gradient: linear-gradient(135deg, var(--main), var(--accent));
   --radius: 18px;
   --transition: all 0.35s ease;
-  --shadow: 0 20px 40px rgba(140, 169, 255, 0.35);
+  --shadow: 0 20px 40px rgba(6, 12, 32, 0.55); /* deep subtle shadow */
 }
 
+/* Preserve layout resets */
 * {
   margin: 0;
   padding: 0;
@@ -32,12 +40,12 @@ body {
 
   background:
     linear-gradient(
-      rgba(140, 169, 255, 0.7),
-      rgba(140, 169, 255, 0.7)
+      rgba(11, 18, 40, 0.72),
+      rgba(11, 18, 40, 0.72)
     ),
     url("../assets/bg-left.png"),
     url("../assets/bg-right.png"),
-    radial-gradient(circle at top, #FFF2C6, var(--bg-main));
+    radial-gradient(circle at top, var(--bg-alt), var(--bg-main));
 
   /* 👇 THIS IS THE IMPORTANT PART */
   background-size:
@@ -75,8 +83,8 @@ body::before {
 
   background:
     linear-gradient(
-      rgba(140, 169, 255, 0.78),
-      rgba(140, 169, 255, 0.78)
+      rgba(11, 18, 40, 0.80),
+      rgba(11, 18, 40, 0.80)
     ),
     url("./assets/bg-left.png"),
     url("./assets/bg-right.png");
@@ -88,7 +96,7 @@ body::before {
   pointer-events: none;
 }
 
-/* Subtle color harmony layer (matches your accent) */
+/* Subtle color harmony layer (matches the refined primary) */
 body::after {
   content: "";
   position: fixed;
@@ -97,7 +105,7 @@ body::after {
 
   background: radial-gradient(
     circle at top,
-    rgba(140, 169, 255, 0.12),
+    rgba(127, 169, 255, 0.10),
     transparent 65%
   );
 
@@ -161,7 +169,7 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 6%;
-  background: rgba(140, 169, 255, 0.75);
+  background: rgba(11, 18, 40, 0.75);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--glass-border);
 }
@@ -220,7 +228,7 @@ a {
   padding: 0.55rem 1.2rem;
   border-radius: 999px;
   background: var(--gradient);
-  color: #FFF2C6;
+  color: #07102a; /* dark for readability on light gradient */
   font-weight: 700;
 }
 
@@ -352,7 +360,7 @@ footer {
   padding: 0.9rem 1.6rem;
   border-radius: 999px;
   background: var(--gradient);
-  color: #FFF2C6;
+  color: #07102a; /* dark text on bright gradient for contrast */
   font-weight: 800;
   transition: var(--transition);
 }
@@ -423,7 +431,7 @@ footer {
     top: 100%;
     left: 0;
     width: 100%;
-    background: rgba(140, 169, 255, 0.95);
+    background: rgba(11, 18, 40, 0.95);
     flex-direction: column;
     gap: 1.2rem;
     padding: 2rem;
@@ -466,11 +474,11 @@ footer {
   body {
     background:
       linear-gradient(
-        rgba(140, 169, 255, 0.65),
-        rgba(140, 169, 255, 0.75)
+        rgba(11, 18, 40, 0.68),
+        rgba(11, 18, 40, 0.78)
       ),
       url("../assets/bg-left.png"),
-      radial-gradient(circle at top, #FFF2C6, var(--bg-main));
+      radial-gradient(circle at top, var(--bg-alt), var(--bg-main));
 
     background-size:
       cover,
@@ -541,12 +549,13 @@ footer {
   display: inline;
 }
 
+/* Map button tuned to primary */
 .map-button {
   display: inline-block;
   margin-left: 10px;
   padding: 6px 14px;
-  background-color: #8CA9FF;
-  color: #FFF2C6 !important;
+  background-color: var(--main);
+  color: #07102a !important;
   text-decoration: none !important;
   border-radius: 6px;
   font-size: 14px;
@@ -560,17 +569,18 @@ footer {
   border-radius: 18px;
   background: linear-gradient(
     145deg,
-    rgba(140,169,255,0.08),
-    rgba(140,169,255,0.02)
+    rgba(127,169,255,0.08),
+    rgba(255,241,184,0.02)
   );
   backdrop-filter: blur(12px);
-  box-shadow: 0 25px 50px rgba(140,169,255,0.25);
+  box-shadow: 0 25px 50px rgba(6, 12, 32, 0.28);
 }
 
 .contact-form h2 {
   margin-bottom: 20px;
   font-size: 1.6rem;
   text-align: center;
+  color: var(--text-main);
 }
 
 .form-group {
@@ -582,7 +592,7 @@ footer {
   margin-bottom: 6px;
   font-size: 14px;
   font-weight: 600;
-  color: #8CA9FF;
+  color: var(--main);
 }
 
 .form-group input,
@@ -590,9 +600,9 @@ footer {
   width: 100%;
   padding: 14px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(140,169,255,0.15);
-  background: rgba(140,169,255,0.05);
-  color: #FFF2C6;
+  border: 1px solid rgba(127,169,255,0.15);
+  background: rgba(127,169,255,0.03);
+  color: var(--text-main);
   font-size: 15px;
   outline: none;
   transition: border 0.25s ease, box-shadow 0.25s ease;
@@ -600,15 +610,16 @@ footer {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: #FFF2C6;
+  color: rgba(246,239,200,0.9); /* warm soft placeholder */
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #8CA9FF;
-  box-shadow: 0 0 0 3px rgba(140,169,255,0.25);
+  border-color: var(--main);
+  box-shadow: 0 0 0 3px rgba(127,169,255,0.18);
 }
 
+/* Primary button tuned to gradient and dark text for legibility */
 .btn-primary {
   width: 100%;
   margin-top: 10px;
@@ -616,7 +627,8 @@ footer {
   border-radius: 14px;
   font-size: 16px;
   font-weight: 600;
-  background: linear-gradient(135deg, #8CA9FF, #FFF2C6);
+  background: linear-gradient(135deg, var(--main), var(--accent));
+  color: #07102a;
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -624,12 +636,12 @@ footer {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(140,169,255,0.45);
+  box-shadow: 0 14px 30px rgba(95,134,217,0.28);
 }
 
 .form-note {
   margin-top: 16px;
   font-size: 13px;
-  color: #FFF2C6;
+  color: var(--text-muted);
   text-align: center;
 }
