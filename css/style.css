@@ -3,18 +3,18 @@
 ========================= */
 
 :root {
-  --bg-main: #0f1020;
-  --bg-alt: #15162e;
-  --card-bg: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --text-main: #ffffff;
-  --text-muted: #b8b8d4;
-  --accent: #7f8cff;
-  --accent-alt: #5ce1e6;
-  --gradient: linear-gradient(135deg, #7f8cff, #5ce1e6);
+  --bg-main: #8CA9FF;
+  --bg-alt: #8CA9FF;
+  --card-bg: rgba(140, 169, 255, 0.06);
+  --glass-border: rgba(140, 169, 255, 0.12);
+  --text-main: #8CA9FF;
+  --text-muted: #FFF2C6;
+  --accent: #8CA9FF;
+  --accent-alt: #FFF2C6;
+  --gradient: linear-gradient(135deg, #8CA9FF, #FFF2C6);
   --radius: 18px;
   --transition: all 0.35s ease;
-  --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  --shadow: 0 20px 40px rgba(140, 169, 255, 0.35);
 }
 
 * {
@@ -32,12 +32,12 @@ body {
 
   background:
     linear-gradient(
-      rgba(15, 16, 32, 0.7),
-      rgba(15, 16, 32, 0.7)
+      rgba(140, 169, 255, 0.7),
+      rgba(140, 169, 255, 0.7)
     ),
     url("../assets/bg-left.png"),
     url("../assets/bg-right.png"),
-    radial-gradient(circle at top, #1b1c3b, var(--bg-main));
+    radial-gradient(circle at top, #FFF2C6, var(--bg-main));
 
   /* 👇 THIS IS THE IMPORTANT PART */
   background-size:
@@ -75,8 +75,8 @@ body::before {
 
   background:
     linear-gradient(
-      rgba(15, 16, 32, 0.78),
-      rgba(15, 16, 32, 0.78)
+      rgba(140, 169, 255, 0.78),
+      rgba(140, 169, 255, 0.78)
     ),
     url("./assets/bg-left.png"),
     url("./assets/bg-right.png");
@@ -97,7 +97,7 @@ body::after {
 
   background: radial-gradient(
     circle at top,
-    rgba(127, 140, 255, 0.12),
+    rgba(140, 169, 255, 0.12),
     transparent 65%
   );
 
@@ -161,7 +161,7 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 6%;
-  background: rgba(15, 16, 32, 0.75);
+  background: rgba(140, 169, 255, 0.75);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--glass-border);
 }
@@ -220,7 +220,7 @@ a {
   padding: 0.55rem 1.2rem;
   border-radius: 999px;
   background: var(--gradient);
-  color: #000;
+  color: #FFF2C6;
   font-weight: 700;
 }
 
@@ -352,7 +352,7 @@ footer {
   padding: 0.9rem 1.6rem;
   border-radius: 999px;
   background: var(--gradient);
-  color: #000;
+  color: #FFF2C6;
   font-weight: 800;
   transition: var(--transition);
 }
@@ -423,7 +423,7 @@ footer {
     top: 100%;
     left: 0;
     width: 100%;
-    background: rgba(15, 16, 32, 0.95);
+    background: rgba(140, 169, 255, 0.95);
     flex-direction: column;
     gap: 1.2rem;
     padding: 2rem;
@@ -466,11 +466,11 @@ footer {
   body {
     background:
       linear-gradient(
-        rgba(15, 16, 32, 0.65),
-        rgba(15, 16, 32, 0.75)
+        rgba(140, 169, 255, 0.65),
+        rgba(140, 169, 255, 0.75)
       ),
       url("../assets/bg-left.png"),
-      radial-gradient(circle at top, #1b1c3b, var(--bg-main));
+      radial-gradient(circle at top, #FFF2C6, var(--bg-main));
 
     background-size:
       cover,
@@ -545,8 +545,8 @@ footer {
   display: inline-block;
   margin-left: 10px;
   padding: 6px 14px;
-  background-color: #1a73e8;
-  color: #fff !important;
+  background-color: #8CA9FF;
+  color: #FFF2C6 !important;
   text-decoration: none !important;
   border-radius: 6px;
   font-size: 14px;
@@ -560,11 +560,11 @@ footer {
   border-radius: 18px;
   background: linear-gradient(
     145deg,
-    rgba(255,255,255,0.08),
-    rgba(255,255,255,0.02)
+    rgba(140,169,255,0.08),
+    rgba(140,169,255,0.02)
   );
   backdrop-filter: blur(12px);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+  box-shadow: 0 25px 50px rgba(140,169,255,0.25);
 }
 
 .contact-form h2 {
@@ -582,7 +582,7 @@ footer {
   margin-bottom: 6px;
   font-size: 14px;
   font-weight: 600;
-  color: #cbd5f5;
+  color: #8CA9FF;
 }
 
 .form-group input,
@@ -590,9 +590,9 @@ footer {
   width: 100%;
   padding: 14px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.05);
-  color: #fff;
+  border: 1px solid rgba(140,169,255,0.15);
+  background: rgba(140,169,255,0.05);
+  color: #FFF2C6;
   font-size: 15px;
   outline: none;
   transition: border 0.25s ease, box-shadow 0.25s ease;
@@ -600,13 +600,13 @@ footer {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: #9aa4c7;
+  color: #FFF2C6;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #1a73e8;
-  box-shadow: 0 0 0 3px rgba(26,115,232,0.25);
+  border-color: #8CA9FF;
+  box-shadow: 0 0 0 3px rgba(140,169,255,0.25);
 }
 
 .btn-primary {
@@ -616,7 +616,7 @@ footer {
   border-radius: 14px;
   font-size: 16px;
   font-weight: 600;
-  background: linear-gradient(135deg, #1a73e8, #4f8cff);
+  background: linear-gradient(135deg, #8CA9FF, #FFF2C6);
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -624,12 +624,12 @@ footer {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(26,115,232,0.45);
+  box-shadow: 0 14px 30px rgba(140,169,255,0.45);
 }
 
 .form-note {
   margin-top: 16px;
   font-size: 13px;
-  color: #9aa4c7;
+  color: #FFF2C6;
   text-align: center;
 }
