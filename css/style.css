@@ -42,8 +42,8 @@ body {
 
    background:
   linear-gradient(
-    rgba(18, 26, 20, 0.55),
-    rgba(18, 26, 20, 0.65)
+    rgba(18, 26, 20, 0.7),
+    rgba(18, 26, 20, 0.7)
   ),
   url("../assets/bg-left.png"),
   url("../assets/bg-right.png"),
@@ -151,7 +151,7 @@ h3 {
 }
 
 p {
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 1rem;
 }
 
@@ -172,7 +172,7 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 6%;
-  background: rgba(15, 16, 32, 0.75);
+  background: rgba(18, 26, 20, 0.75);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--glass-border);
 }
