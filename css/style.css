@@ -303,14 +303,15 @@ footer {
 }
 
 .card {
-  background: var(--card-bg);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: var(--radius);
   padding: 2.2rem;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px) saturate(120%);
   box-shadow: var(--shadow);
   transition: var(--transition);
 }
+
 
 .card:hover {
   transform: translateY(-10px);
