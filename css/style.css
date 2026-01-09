@@ -2,9 +2,9 @@
    GLOBAL RESET & VARIABLES
    (Light theme using your requested colors:
     main = #8CA9FF (60% role), accent = #FFF2C6 (40% role))
-   Adjusted: slightly bolder typography, navbar forced light on scroll,
-   refined full-screen side background panels with a soft blended seam
-   and a subtle white wash so images integrate nicely with the page.
+   Adjusted: stronger, larger typography; refined background panels;
+   increased white wash to make images blend with the UI (background
+   opacity visually lowered).
 ========================= */
 
 :root {
@@ -19,26 +19,27 @@
   --bg-alt: #F3F7FF;         /* subtle variation for radial */
 
   /* Card / glass tokens */
-  --card-bg: rgba(255, 255, 255, 0.96);
+  --card-bg: rgba(255, 255, 255, 0.98);
   --glass-border: rgba(140, 169, 255, 0.18);
   --glass-border-strong: rgba(140, 169, 255, 0.24);
 
-  /* Typography & weights */
+  /* Typography & weights (made stronger / thicker) */
   --font-family-base: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-weight-base: 500;   /* slightly thicker body copy */
-  --font-weight-heading: 800; /* stronger headings but still professional */
+  --font-weight-base: 600;   /* thicker body copy for better legibility */
+  --font-weight-heading: 900; /* stronger headings for presence */
 
-  --text-main: #07203a;      /* dark navy for primary copy (high contrast) */
-  --text-muted: rgba(7, 32, 58, 0.68);
-  --text-muted-soft: rgba(7,32,58,0.48);
+  /* Text colors: darker & bolder */
+  --text-main: #041526;      /* very dark navy for maximum contrast */
+  --text-muted: rgba(4, 21, 38, 0.80); /* stronger muted tone */
+  --text-muted-soft: rgba(4,21,38,0.56);
 
   --gradient: linear-gradient(135deg, var(--main), var(--accent));
   --radius: 18px;
   --transition: all 0.35s ease;
-  --shadow: 0 18px 36px rgba(7, 32, 58, 0.06);
+  --shadow: 0 18px 36px rgba(4, 10, 24, 0.06);
 }
 
-/* Preserve layout resets */
+/* Preserve layout resets and improved font rendering */
 * {
   margin: 0;
   padding: 0;
@@ -48,25 +49,17 @@
   text-rendering: optimizeLegibility;
 }
 
+/* Base font sizing (keeps spacing predictable) */
 html {
   scroll-behavior: smooth;
   font-family: var(--font-family-base);
+  font-size: 16px;
 }
-
-/* =========================
-   BODY & BACKGROUND IMAGES (REFINED)
-   Goals:
-   - Two full-height side panels (left & right), each covering half the viewport
-   - Preserve image aspect ratio with background-size: cover
-   - Add a gentle central seam (soft gradient) to avoid a hard cut
-   - Add a subtle white wash overlay (increased slightly) to blend imagery with the light UI
-   - Tune image color/brightness so the site looks cohesive and "great"
-========================= */
 
 body {
   font-family: var(--font-family-base);
-  font-weight: var(--font-weight-base);
-  line-height: 1.7;
+  font-weight: var(--font-weight-base); /* thicker overall */
+  line-height: 1.75;
   color: var(--text-main);
   overflow-x: hidden;
 
@@ -75,7 +68,7 @@ body {
   background-attachment: fixed;
 }
 
-/* LEFT PANEL: full-height left half */
+/* LEFT PANEL: full-height left half (image dimmed slightly by overlay) */
 body::before {
   content: "";
   position: fixed;
@@ -85,19 +78,17 @@ body::before {
   width: 50%;
   z-index: -4;
   background-image:
-    /* subtle soft vignette over the image to help readability on top */
-    linear-gradient(to right, rgba(255,255,255,0.08), rgba(255,255,255,0.00)),
+    linear-gradient(to right, rgba(255,255,255,0.12), rgba(255,255,255,0.00)),
     url("../assets/bg-left.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   pointer-events: none;
-  /* gentle color tuning so photos match the UI vibe */
   filter: saturate(1.02) contrast(1.02) brightness(0.98);
   will-change: transform, opacity;
 }
 
-/* RIGHT PANEL: full-height right half */
+/* RIGHT PANEL: full-height right half (image dimmed slightly by overlay) */
 body::after {
   content: "";
   position: fixed;
@@ -107,7 +98,7 @@ body::after {
   width: 50%;
   z-index: -4;
   background-image:
-    linear-gradient(to left, rgba(255,255,255,0.08), rgba(255,255,255,0.00)),
+    linear-gradient(to left, rgba(255,255,255,0.12), rgba(255,255,255,0.00)),
     url("../assets/bg-right.png");
   background-position: center;
   background-repeat: no-repeat;
@@ -118,23 +109,24 @@ body::after {
 }
 
 /* SOFT SEAM: centered blend between the two images so the split isn't harsh.
-   Slightly wider and lower-contrast for an elegant transition. */
+   Increased central white to blend imagery more with the UI (this visually
+   lowers background prominence). */
 html::before {
   content: "";
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 320px; /* seam width — tweak if you want a softer/stronger blend */
+  width: 360px; /* seam width — adjust if you want softer/stronger blend */
   height: 100%;
   z-index: -3;
   pointer-events: none;
   background: linear-gradient(
     90deg,
     rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.18) 20%,
-    rgba(255,255,255,0.30) 50%,
-    rgba(255,255,255,0.18) 80%,
+    rgba(255,255,255,0.26) 18%,
+    rgba(255,255,255,0.46) 50%,
+    rgba(255,255,255,0.26) 82%,
     rgba(255,255,255,0) 100%
   );
   mix-blend-mode: normal;
@@ -142,8 +134,7 @@ html::before {
 }
 
 /* WHITE WASH OVERLAY: increases white presence so images subtly blend with UI.
-   Lower the opacity compared to a pure veil — tuned for a softer, airy feel.
-   This is what the user described as "blend with the white". */
+   This is the main change that visually lowers background opacity. */
 html::after {
   content: "";
   position: fixed;
@@ -151,22 +142,22 @@ html::after {
   z-index: -2;
   pointer-events: none;
   background: linear-gradient(
-    rgba(255,255,255,0.22), /* slightly stronger white wash for blending */
-    rgba(255,255,255,0.18)
+    rgba(255,255,255,0.36), /* stronger white wash for blending */
+    rgba(255,255,255,0.30)
   );
   will-change: opacity;
 }
 
-/* Accessibility: reduce heavy contrast at the seam on smaller viewports */
+/* Reduce seam intensity on smaller screens */
 @media (max-width: 1280px) {
   html::before {
-    width: 240px;
+    width: 260px;
     background: linear-gradient(
       90deg,
       rgba(255,255,255,0) 0%,
-      rgba(255,255,255,0.16) 25%,
-      rgba(255,255,255,0.28) 50%,
-      rgba(255,255,255,0.16) 75%,
+      rgba(255,255,255,0.22) 25%,
+      rgba(255,255,255,0.40) 50%,
+      rgba(255,255,255,0.22) 75%,
       rgba(255,255,255,0) 100%
     );
   }
@@ -187,7 +178,9 @@ li {
 }
 
 /* =========================
-   TYPOGRAPHY
+   TYPOGRAPHY (larger & thicker)
+   - Headings increased for better presence
+   - Body text slightly larger and heavier for legibility
 ========================= */
 
 h1,
@@ -199,36 +192,43 @@ h4 {
   color: var(--text-main);
 }
 
+/* Increased heading sizes for better hierarchy and visibility */
 h1 {
-  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-size: clamp(2.6rem, 5.2vw, 4.2rem);
+  line-height: 1.05;
 }
 
 h2 {
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  line-height: 1.1;
 }
 
 h3 {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  line-height: 1.2;
 }
 
+/* Slightly larger body copy for readability */
 p {
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
-/* links use primary by default */
+/* Links use primary and visually stronger */
 a {
   color: var(--main);
   text-decoration: none;
   transition: color 0.18s ease;
+  font-weight: 700;
 }
-a:hover, a:focus {
+a:hover,
+a:focus {
   color: var(--accent-deep);
 }
 
 /* =========================
    NAVBAR
-   - force light appearance even if JS toggles classes on scroll
+   - keep light and increase visibility of text/links
 ========================= */
 
 .navbar {
@@ -239,18 +239,18 @@ a:hover, a:focus {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 6%;
-  background: rgba(255,255,255,0.94) !important; /* force light */
+  background: rgba(255,255,255,0.96) !important; /* even lighter for contrast */
   color: var(--text-main) !important;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--glass-border);
   transition: background 0.18s ease !important;
 }
 
-/* Common "scrolled" / "solid" class names that some JS add: ensure they remain light */
+/* Keep scrolled/solid/dark classes light as well */
 .navbar.scrolled,
 .navbar.solid,
 .navbar.dark {
-  background: rgba(255,255,255,0.94) !important;
+  background: rgba(255,255,255,0.96) !important;
   color: var(--text-main) !important;
   border-bottom-color: var(--glass-border-strong) !important;
 }
@@ -263,11 +263,12 @@ a:hover, a:focus {
   z-index: 2147483647;
   opacity: 1;
   pointer-events: none;
-  filter: contrast(1.1) brightness(1.02);
+  filter: contrast(1.08) brightness(1.02);
 }
 
+/* Stronger logo presence */
 .logo {
-  font-size: 1.6rem;
+  font-size: 1.75rem;
   font-weight: 900;
   background: var(--gradient);
   -webkit-background-clip: text;
@@ -283,7 +284,7 @@ a:hover, a:focus {
   font-weight: 700;
   position: relative;
   transition: var(--transition);
-  color: var(--text-muted);
+  color: var(--text-main); /* make links more visible */
 }
 
 .nav-links a::after {
@@ -331,6 +332,12 @@ a:hover, a:focus {
   padding-inline: 1.5rem;
 }
 
+/* Ensure hero H1 is prominent and readable */
+.hero .reveal h1,
+.hero h1 {
+  margin-bottom: 0.6rem;
+}
+
 /* =========================
    PAGE HERO (OTHER PAGES)
 ========================= */
@@ -344,7 +351,7 @@ a:hover, a:focus {
 
 .page-hero p {
   margin-top: 1.4rem;
-  font-size: 1.1rem;
+  font-size: 1.12rem;
 }
 
 /* =========================
@@ -392,7 +399,7 @@ footer {
   background: var(--card-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
-  padding: 2.2rem;
+  padding: 2.4rem; /* slightly more padding for breathing room */
   backdrop-filter: blur(6px);
   box-shadow: var(--shadow);
   transition: var(--transition);
@@ -400,12 +407,22 @@ footer {
   font-weight: var(--font-weight-base);
 }
 
+.card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
 .card:hover {
   transform: translateY(-8px);
 }
 
 .card i {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 1.2rem;
   background: var(--gradient);
   -webkit-background-clip: text;
@@ -432,7 +449,7 @@ footer {
 }
 
 .showcase-image {
-  min-height: 240px;
+  min-height: 260px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -454,12 +471,16 @@ footer {
   padding: 6rem 6%;
 }
 
+.cta h2 {
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+}
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
   margin-top: 2rem;
-  padding: 0.9rem 1.6rem;
+  padding: 0.95rem 1.8rem;
   border-radius: 999px;
   background: var(--gradient);
   color: var(--text-main);
@@ -467,6 +488,8 @@ footer {
   transition: var(--transition);
   box-shadow: 0 10px 30px rgba(95,134,217,0.08);
 }
+
+.btn-primary i { font-size: 1.05rem; }
 
 .btn-primary:hover {
   transform: scale(1.04);
@@ -493,6 +516,7 @@ footer {
   display: block;
   margin-bottom: 0.4rem;
   color: var(--text-muted);
+  font-weight: 600;
 }
 
 .socials i {
@@ -504,7 +528,7 @@ footer {
 .copyright {
   text-align: center;
   margin-top: 2rem;
-  font-size: 0.85rem;
+  font-size: 0.90rem;
   color: var(--text-muted-soft);
 }
 
@@ -530,11 +554,11 @@ footer {
 ========================= */
 
 @media (max-width: 1280px) {
-  html::before { width: 240px; }
+  html::before { width: 260px; }
 }
 
 @media (max-width: 1024px) {
-  html::before { width: 180px; }
+  html::before { width: 200px; }
 }
 
 @media (max-width: 768px) {
@@ -574,7 +598,7 @@ footer {
     height: 45vh;
     bottom: auto;
     background-image:
-      linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(255,255,255,0.00)),
+      linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.00)),
       url("../assets/bg-left.png");
     background-position: center top;
     background-size: cover;
@@ -583,7 +607,6 @@ footer {
   /* Hide the right panel to avoid tiny-crop artifacts */
   body::after { display: none; }
 
-  /* Make seam cover the banner area softly */
   html::before {
     width: 100%;
     height: 45vh;
@@ -593,7 +616,7 @@ footer {
     background: linear-gradient(
       to bottom,
       rgba(255,255,255,0) 30%,
-      rgba(255,255,255,0.18) 50%,
+      rgba(255,255,255,0.28) 50%,
       rgba(255,255,255,0) 70%
     );
     z-index: -3;
@@ -601,8 +624,8 @@ footer {
 
   html::after {
     background: linear-gradient(
-      rgba(255,255,255,0.14),
-      rgba(255,255,255,0.08)
+      rgba(255,255,255,0.24),
+      rgba(255,255,255,0.16)
     );
   }
 }
@@ -683,14 +706,14 @@ footer {
     rgba(255,242,198,0.02)
   );
   backdrop-filter: blur(8px);
-  box-shadow: 0 18px 36px rgba(7,32,58,0.06);
+  box-shadow: 0 18px 36px rgba(4,10,24,0.06);
   color: var(--text-main);
   border: 1px solid var(--glass-border);
 }
 
 .contact-form h2 {
   margin-bottom: 20px;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   text-align: center;
   color: var(--text-main);
 }
@@ -720,7 +743,7 @@ footer {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: rgba(7,32,58,0.48);
+  color: rgba(4,21,38,0.48);
 }
 
 .form-group input:focus,
