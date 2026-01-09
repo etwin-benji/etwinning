@@ -3,8 +3,8 @@
    (Light theme using your requested colors:
     main = #8CA9FF (60% role), accent = #FFF2C6 (40% role))
    Adjusted: slightly bolder typography, navbar forced light on scroll,
-   background images implemented as fixed full-height side panels
-   with a soft gradient seam between them to avoid a hard cut.
+   refined full-screen side background panels with a soft blended seam
+   and a subtle white wash so images integrate nicely with the page.
 ========================= */
 
 :root {
@@ -54,29 +54,28 @@ html {
 }
 
 /* =========================
-   BODY & BACKGROUND IMAGES
-   - Use two fixed pseudo-panels for left and right images
-   - Each panel is full-height and covers its half using background-size: cover
-   - A soft central gradient on top blends the seam so it doesn't look like a hard cut
-   - A subtle wash overlay keeps the overall look cohesive
-   - This approach keeps both images visible, full-height, and preserves aspect ratio
+   BODY & BACKGROUND IMAGES (REFINED)
+   Goals:
+   - Two full-height side panels (left & right), each covering half the viewport
+   - Preserve image aspect ratio with background-size: cover
+   - Add a gentle central seam (soft gradient) to avoid a hard cut
+   - Add a subtle white wash overlay (increased slightly) to blend imagery with the light UI
+   - Tune image color/brightness so the site looks cohesive and "great"
 ========================= */
 
 body {
   font-family: var(--font-family-base);
-  font-weight: var(--font-weight-base); /* slightly bolder overall */
+  font-weight: var(--font-weight-base);
   line-height: 1.7;
   color: var(--text-main);
   overflow-x: hidden;
 
-  /* Keep a subtle global wash and radial vignette for depth.
-     Individual images are handled with pseudo-elements below. */
-  background:
-    radial-gradient(circle at top, var(--bg-alt), var(--bg-main));
+  /* Base radial for subtle depth */
+  background: radial-gradient(circle at top, var(--bg-alt), var(--bg-main));
   background-attachment: fixed;
 }
 
-/* Left image panel (full height, left half) */
+/* LEFT PANEL: full-height left half */
 body::before {
   content: "";
   position: fixed;
@@ -84,17 +83,21 @@ body::before {
   left: 0;
   bottom: 0;
   width: 50%;
-  z-index: -3;
-  background-image: url("../assets/bg-left.png");
+  z-index: -4;
+  background-image:
+    /* subtle soft vignette over the image to help readability on top */
+    linear-gradient(to right, rgba(255,255,255,0.08), rgba(255,255,255,0.00)),
+    url("../assets/bg-left.png");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; /* preserves image aspect ratio while filling the panel */
+  background-size: cover;
   pointer-events: none;
-  /* Slight dim so content remains readable on top */
-  filter: contrast(1.02) saturate(1.02);
+  /* gentle color tuning so photos match the UI vibe */
+  filter: saturate(1.02) contrast(1.02) brightness(0.98);
+  will-change: transform, opacity;
 }
 
-/* Right image panel (full height, right half) */
+/* RIGHT PANEL: full-height right half */
 body::after {
   content: "";
   position: fixed;
@@ -102,58 +105,77 @@ body::after {
   right: 0;
   bottom: 0;
   width: 50%;
-  z-index: -3;
-  background-image: url("../assets/bg-right.png");
+  z-index: -4;
+  background-image:
+    linear-gradient(to left, rgba(255,255,255,0.08), rgba(255,255,255,0.00)),
+    url("../assets/bg-right.png");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; /* preserves image aspect ratio while filling the panel */
+  background-size: cover;
   pointer-events: none;
-  filter: contrast(1.02) saturate(1.02);
+  filter: saturate(1.02) contrast(1.02) brightness(0.98);
+  will-change: transform, opacity;
 }
 
-/* HTML-level overlay elements:
-   - html::before: soft central seam gradient to blend the two images
-   - html::after: subtle wash overlay (keeps site airy but helps legibility)
-*/
+/* SOFT SEAM: centered blend between the two images so the split isn't harsh.
+   Slightly wider and lower-contrast for an elegant transition. */
 html::before {
   content: "";
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 240px; /* controls the width of the blended seam — tweak if needed */
+  width: 320px; /* seam width — tweak if you want a softer/stronger blend */
   height: 100%;
-  z-index: -2;
+  z-index: -3;
   pointer-events: none;
   background: linear-gradient(
     90deg,
     rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.26) 30%,
-    rgba(255,255,255,0.26) 70%,
+    rgba(255,255,255,0.18) 20%,
+    rgba(255,255,255,0.30) 50%,
+    rgba(255,255,255,0.18) 80%,
     rgba(255,255,255,0) 100%
   );
   mix-blend-mode: normal;
+  will-change: opacity;
 }
 
-/* subtle wash overlay to unify tone and ensure text contrast */
+/* WHITE WASH OVERLAY: increases white presence so images subtly blend with UI.
+   Lower the opacity compared to a pure veil — tuned for a softer, airy feel.
+   This is what the user described as "blend with the white". */
 html::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   pointer-events: none;
   background: linear-gradient(
-    rgba(140,169,255,0.03),
-    rgba(255,242,198,0.01)
+    rgba(255,255,255,0.22), /* slightly stronger white wash for blending */
+    rgba(255,255,255,0.18)
   );
+  will-change: opacity;
 }
 
-/* ==================================================
-   GLOBAL DUAL BACKGROUND (REMOVED image-layer duplication)
-   (previous body background layers were replaced by the pseudo panel approach above)
-================================================== */
+/* Accessibility: reduce heavy contrast at the seam on smaller viewports */
+@media (max-width: 1280px) {
+  html::before {
+    width: 240px;
+    background: linear-gradient(
+      90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.16) 25%,
+      rgba(255,255,255,0.28) 50%,
+      rgba(255,255,255,0.16) 75%,
+      rgba(255,255,255,0) 100%
+    );
+  }
+}
 
-/* Prevent text touching edges or overflowing */
+/* =========================
+   Prevent text touching edges or overflowing
+========================= */
+
 p,
 h1,
 h2,
@@ -166,8 +188,6 @@ li {
 
 /* =========================
    TYPOGRAPHY
-   - headings slightly thicker
-   - body slightly thicker for better legibility
 ========================= */
 
 h1,
@@ -209,7 +229,6 @@ a:hover, a:focus {
 /* =========================
    NAVBAR
    - force light appearance even if JS toggles classes on scroll
-   - keep it visually consistent and readable
 ========================= */
 
 .navbar {
@@ -414,9 +433,6 @@ footer {
 
 .showcase-image {
   min-height: 240px;
-  /* Keep images inside placeholders from stretching:
-     use background-size: cover on the image container,
-     and ensure img elements use object-fit where applicable. */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -425,7 +441,7 @@ footer {
 .showcase-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* prevents stretching, maintains aspect ratio */
+  object-fit: cover;
   display: block;
 }
 
@@ -508,22 +524,21 @@ footer {
 }
 
 /* =========================
-   MOBILE
+   RESPONSIVE / MOBILE
    - panels collapse or adjust width to avoid awkward cuts on small screens
-   - flattened @media blocks to avoid nesting issues
+   - seam and wash adjusted for smaller devices
 ========================= */
 
+@media (max-width: 1280px) {
+  html::before { width: 240px; }
+}
+
 @media (max-width: 1024px) {
-  /* narrow the seam so it reads better on tablets */
-  html::before {
-    width: 160px;
-  }
+  html::before { width: 180px; }
 }
 
 @media (max-width: 768px) {
-  .nav-toggle {
-    display: block;
-  }
+  .nav-toggle { display: block; }
 
   .nav-links {
     position: absolute;
@@ -545,43 +560,31 @@ footer {
     opacity: 0.95;
   }
 
-  .nav-links.active {
-    display: flex;
-  }
+  .nav-links.active { display: flex; }
 
-  .hero {
-    padding: 5rem 5% 4rem;
-  }
+  .hero { padding: 5rem 5% 4rem; }
+  .hero-inner { padding-inline: 1.25rem; }
+  .showcase-card { grid-template-columns: 1fr; }
+  .page-hero { padding-top: 5rem; }
 
-  .hero-inner {
-    padding-inline: 1.25rem;
-  }
-
-  .showcase-card {
-    grid-template-columns: 1fr;
-  }
-
-  .page-hero {
-    padding-top: 5rem;
-  }
-
-  /* Mobile: the left and right panels should not fight for space.
-     Show the left image as a top banner and fade the seam; keep right image hidden to avoid tiny-crop artifacts. */
+  /* Mobile: show left image as top banner (full width) with seam fade */
   body::before {
     left: 0;
     width: 100%;
     height: 45vh;
     bottom: auto;
+    background-image:
+      linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(255,255,255,0.00)),
+      url("../assets/bg-left.png");
     background-position: center top;
     background-size: cover;
   }
 
-  body::after {
-    display: none;
-  }
+  /* Hide the right panel to avoid tiny-crop artifacts */
+  body::after { display: none; }
 
+  /* Make seam cover the banner area softly */
   html::before {
-    /* center seam less visible on mobile */
     width: 100%;
     height: 45vh;
     top: 0;
@@ -590,17 +593,16 @@ footer {
     background: linear-gradient(
       to bottom,
       rgba(255,255,255,0) 30%,
-      rgba(255,255,255,0.06) 50%,
+      rgba(255,255,255,0.18) 50%,
       rgba(255,255,255,0) 70%
     );
-    z-index: -2;
+    z-index: -3;
   }
 
   html::after {
-    /* keep subtle wash but lighter on mobile */
     background: linear-gradient(
-      rgba(140,169,255,0.02),
-      rgba(255,242,198,0.01)
+      rgba(255,255,255,0.14),
+      rgba(255,255,255,0.08)
     );
   }
 }
@@ -655,9 +657,7 @@ footer {
   gap: 12px;
 }
 
-.address-text {
-  display: inline;
-}
+.address-text { display: inline; }
 
 .map-button {
   display: inline-block;
@@ -695,9 +695,7 @@ footer {
   color: var(--text-main);
 }
 
-.form-group {
-  margin-bottom: 18px;
-}
+.form-group { margin-bottom: 18px; }
 
 .form-group label {
   display: block;
