@@ -65,7 +65,7 @@ body {
     2) left side image
     3) right side image
     4) radial gradient for soft vignette
-    Use auto 100% for side images to preserve aspect ratio (no stretch).
+    Side images set to 50% width with auto height (no stretch).
   */
   background:
     linear-gradient(
@@ -78,8 +78,8 @@ body {
 
   background-size:
     cover,
-    auto 100%,
-    auto 100%,
+    50% auto,
+    50% auto,
     cover;
 
   background-position:
@@ -94,8 +94,9 @@ body {
 
 /* ==================================================
    GLOBAL DUAL BACKGROUND (ALL PAGES)
-   - keep image aspect ratio (auto 100%)
+   - keep image aspect ratio (50% width + auto height)
    - lower overlay opacity so photos are more visible
+   - preserve both images, positioned left and right
 ================================================== */
 
 body::before {
@@ -106,15 +107,15 @@ body::before {
 
   background:
     linear-gradient(
-      rgba(255,255,255,0.18),   /* light veil but not overpowering */
-      rgba(255,255,255,0.12)
+      rgba(255,255,255,0.12),   /* lighter veil so images show through more */
+      rgba(255,255,255,0.08)
     ),
     url("./assets/bg-left.png"),
     url("./assets/bg-right.png");
 
-  /* keep the side images' height = 100% and width auto so they don't stretch */
-  background-size: cover, auto 100%, auto 100%;
-  background-position: left center, left center, right center;
+  /* keep the side images width = 50% and height auto so they don't stretch */
+  background-size: cover, 50% auto, 50% auto;
+  background-position: center, left center, right center;
   background-repeat: no-repeat;
 
   pointer-events: none;
@@ -332,6 +333,16 @@ footer {
   margin-bottom: 3.5rem;
 }
 
+/* Ensure content blocks stay centered and don't hug edges */
+.section,
+.hero,
+.page-hero,
+.cta,
+footer {
+  padding-left: max(1rem, 4%);
+  padding-right: max(1rem, 4%);
+}
+
 /* =========================
    CARDS & GRIDS
 ========================= */
@@ -390,6 +401,9 @@ footer {
   /* Keep images inside placeholders from stretching:
      use background-size: cover on the image container,
      and ensure img elements use object-fit where applicable. */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .showcase-image img {
@@ -480,6 +494,7 @@ footer {
 /* =========================
    MOBILE
    - side images keep aspect ratio (centered), smaller veil so they show through
+   - flattened @media blocks to avoid nesting issues
 ========================= */
 
 @media (max-width: 768px) {
@@ -499,14 +514,12 @@ footer {
     display: none;
   }
 
-  @media (max-width: 768px) {
-    .corner-euro {
-      top: 50%;
-      left: 130px;
-      transform: translateY(-50%);
-      width: 40px;
-      opacity: 0.95;
-    }
+  .corner-euro {
+    top: 50%;
+    left: 130px;
+    transform: translateY(-50%);
+    width: 40px;
+    opacity: 0.95;
   }
 
   .nav-links.active {
@@ -530,7 +543,8 @@ footer {
   }
 
   body {
-    /* Mobile: keep photos visible but avoid stretching */
+    /* Mobile: keep photos visible but avoid stretching
+       left image shown at ~60% width auto height so aspect preserved */
     background:
       linear-gradient(
         rgba(140,169,255,0.03),
@@ -541,7 +555,7 @@ footer {
 
     background-size:
       cover,
-      auto 60%, /* let mobile side image be smaller and auto-scaled */
+      60% auto,
       cover;
 
     background-position:
@@ -557,6 +571,10 @@ footer {
 
 /* ==================================================
    ADDED FIXES — DO NOT REMOVE (minimal & safe)
+   Fixes:
+   - text touching edges
+   - rare horizontal overflow
+   - navbar breaking on some pages
 ================================================== */
 
 html,
@@ -566,6 +584,7 @@ body {
 }
 
 /* Safety padding so text never hugs screen edges */
+/* (already set above for section/hero/page-hero/cta/footer, repeating here to be extra-safe) */
 .section,
 .hero,
 .page-hero,
@@ -703,3 +722,5 @@ footer {
   color: var(--text-muted);
   text-align: center;
 }
+
+/* End of file */
