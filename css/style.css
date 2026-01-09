@@ -3,7 +3,8 @@
    (Light theme using your requested colors:
     main = #8CA9FF (60% role), accent = #FFF2C6 (40% role))
    Adjusted: slightly bolder typography, navbar forced light on scroll,
-   background images keep their aspect ratio and become more visible.
+   background images implemented as fixed full-height side panels
+   with a soft gradient seam between them to avoid a hard cut.
 ========================= */
 
 :root {
@@ -52,6 +53,15 @@ html {
   font-family: var(--font-family-base);
 }
 
+/* =========================
+   BODY & BACKGROUND IMAGES
+   - Use two fixed pseudo-panels for left and right images
+   - Each panel is full-height and covers its half using background-size: cover
+   - A soft central gradient on top blends the seam so it doesn't look like a hard cut
+   - A subtle wash overlay keeps the overall look cohesive
+   - This approach keeps both images visible, full-height, and preserves aspect ratio
+========================= */
+
 body {
   font-family: var(--font-family-base);
   font-weight: var(--font-weight-base); /* slightly bolder overall */
@@ -59,83 +69,89 @@ body {
   color: var(--text-main);
   overflow-x: hidden;
 
-  /*
-    Background layers:
-    1) subtle color wash (kept very light so photos show through)
-    2) left side image
-    3) right side image
-    4) radial gradient for soft vignette
-    Side images set to 50% width with auto height (no stretch).
-  */
+  /* Keep a subtle global wash and radial vignette for depth.
+     Individual images are handled with pseudo-elements below. */
   background:
-    linear-gradient(
-      rgba(140,169,255,0.04),
-      rgba(255,242,198,0.02)
-    ),
-    url("../assets/bg-left.png"),
-    url("../assets/bg-right.png"),
     radial-gradient(circle at top, var(--bg-alt), var(--bg-main));
-
-  background-size:
-    cover,
-    50% auto,
-    50% auto,
-    cover;
-
-  background-position:
-    center,
-    left center,
-    right center,
-    center;
-
-  background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
-/* ==================================================
-   GLOBAL DUAL BACKGROUND (ALL PAGES)
-   - keep image aspect ratio (50% width + auto height)
-   - lower overlay opacity so photos are more visible
-   - preserve both images, positioned left and right
-================================================== */
-
+/* Left image panel (full height, left half) */
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
-  z-index: -2;
-
-  background:
-    linear-gradient(
-      rgba(255,255,255,0.12),   /* lighter veil so images show through more */
-      rgba(255,255,255,0.08)
-    ),
-    url("./assets/bg-left.png"),
-    url("./assets/bg-right.png");
-
-  /* keep the side images width = 50% and height auto so they don't stretch */
-  background-size: cover, 50% auto, 50% auto;
-  background-position: center, left center, right center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: -3;
+  background-image: url("../assets/bg-left.png");
+  background-position: center;
   background-repeat: no-repeat;
-
+  background-size: cover; /* preserves image aspect ratio while filling the panel */
   pointer-events: none;
+  /* Slight dim so content remains readable on top */
+  filter: contrast(1.02) saturate(1.02);
 }
 
-/* Subtle color harmony layer (soft glow from primary) */
+/* Right image panel (full height, right half) */
 body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: -3;
+  background-image: url("../assets/bg-right.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; /* preserves image aspect ratio while filling the panel */
+  pointer-events: none;
+  filter: contrast(1.02) saturate(1.02);
+}
+
+/* HTML-level overlay elements:
+   - html::before: soft central seam gradient to blend the two images
+   - html::after: subtle wash overlay (keeps site airy but helps legibility)
+*/
+html::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px; /* controls the width of the blended seam — tweak if needed */
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.06) 30%,
+    rgba(255,255,255,0.06) 70%,
+    rgba(255,255,255,0) 100%
+  );
+  mix-blend-mode: normal;
+}
+
+/* subtle wash overlay to unify tone and ensure text contrast */
+html::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-
-  background: radial-gradient(
-    circle at top,
-    rgba(140, 169, 255, 0.08),
-    transparent 65%
-  );
-
   pointer-events: none;
+  background: linear-gradient(
+    rgba(140,169,255,0.03),
+    rgba(255,242,198,0.01)
+  );
 }
+
+/* ==================================================
+   GLOBAL DUAL BACKGROUND (REMOVED image-layer duplication)
+   (previous body background layers were replaced by the pseudo panel approach above)
+================================================== */
 
 /* Prevent text touching edges or overflowing */
 p,
@@ -493,9 +509,16 @@ footer {
 
 /* =========================
    MOBILE
-   - side images keep aspect ratio (centered), smaller veil so they show through
+   - panels collapse or adjust width to avoid awkward cuts on small screens
    - flattened @media blocks to avoid nesting issues
 ========================= */
+
+@media (max-width: 1024px) {
+  /* narrow the seam so it reads better on tablets */
+  html::before {
+    width: 160px;
+  }
+}
 
 @media (max-width: 768px) {
   .nav-toggle {
@@ -542,30 +565,43 @@ footer {
     padding-top: 5rem;
   }
 
-  body {
-    /* Mobile: keep photos visible but avoid stretching
-       left image shown at ~60% width auto height so aspect preserved */
-    background:
-      linear-gradient(
-        rgba(140,169,255,0.03),
-        rgba(255,242,198,0.01)
-      ),
-      url("../assets/bg-left.png"),
-      radial-gradient(circle at top, var(--bg-alt), var(--bg-main));
+  /* Mobile: the left and right panels should not fight for space.
+     Show the left image as a top banner and fade the seam; keep right image hidden to avoid tiny-crop artifacts. */
+  body::before {
+    left: 0;
+    width: 100%;
+    height: 45vh;
+    bottom: auto;
+    background-position: center top;
+    background-size: cover;
+  }
 
-    background-size:
-      cover,
-      60% auto,
-      cover;
+  body::after {
+    display: none;
+  }
 
-    background-position:
-      center,
-      center top,
-      center;
+  html::before {
+    /* center seam less visible on mobile */
+    width: 100%;
+    height: 45vh;
+    top: 0;
+    left: 0;
+    transform: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0) 30%,
+      rgba(255,255,255,0.06) 50%,
+      rgba(255,255,255,0) 70%
+    );
+    z-index: -2;
+  }
 
-    background-repeat: no-repeat;
-
-    background-attachment: scroll; /* mobile friendly */
+  html::after {
+    /* keep subtle wash but lighter on mobile */
+    background: linear-gradient(
+      rgba(140,169,255,0.02),
+      rgba(255,242,198,0.01)
+    );
   }
 }
 
@@ -584,7 +620,6 @@ body {
 }
 
 /* Safety padding so text never hugs screen edges */
-/* (already set above for section/hero/page-hero/cta/footer, repeating here to be extra-safe) */
 .section,
 .hero,
 .page-hero,
