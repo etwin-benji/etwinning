@@ -25,12 +25,12 @@
 <header class="navbar">
   <div class="logo">NOVA</div>
 
-      <img src="assets/euro.png" alt="Euro Icon" class="corner-euro">
-  
+  <img src="assets/euro.png" alt="Euro Icon" class="corner-euro" loading="lazy" width="60" height="60">
+
   <!-- DESKTOP + MOBILE NAV -->
-  <nav class="nav-links">
+  <nav id="primary-navigation" class="nav-links" role="navigation" aria-label="Main Navigation">
     <a href="index.html">Home</a>
-    <a href="about.html" class="active">About</a>
+    <a href="about.html" class="active" aria-current="page">About</a>
     <a href="projects.html">Projects</a>
     <a href="showcase.html">Showcase</a>
     <a href="resources.html">Resources</a>
@@ -38,8 +38,9 @@
   </nav>
 
   <!-- MOBILE MENU BUTTON -->
-  <div class="nav-toggle">
-    <i class="fa-solid fa-bars"></i>
+  <div class="nav-toggle" role="button" aria-controls="primary-navigation" aria-expanded="false" tabindex="0">
+    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    <span class="sr-only" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Toggle navigation</span>
   </div>
 </header>
 
@@ -98,7 +99,7 @@
 
     <div class="values-grid">
       <div class="value-card">
-        <i class="fa-solid fa-lightbulb"></i>
+        <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
         <h3>Curiosity</h3>
         <p>
           We believe curiosity is the foundation of innovation and continuous
@@ -107,7 +108,7 @@
       </div>
 
       <div class="value-card">
-        <i class="fa-solid fa-book-open"></i>
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
         <h3>Transparency</h3>
         <p>
           Clear documentation and honest communication are central to everything
@@ -116,7 +117,7 @@
       </div>
 
       <div class="value-card">
-        <i class="fa-solid fa-scale-balanced"></i>
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
         <h3>Ethics</h3>
         <p>
           Technology should be developed responsibly, with attention to its
@@ -125,7 +126,7 @@
       </div>
 
       <div class="value-card">
-        <i class="fa-solid fa-clock"></i>
+        <i class="fa-solid fa-clock" aria-hidden="true"></i>
         <h3>Long-Term Thinking</h3>
         <p>
           We prioritize sustainable ideas over short-lived trends or hype.
@@ -156,7 +157,7 @@
     We are always open to discussions, feedback, and collaborative projects.
   </p>
   <a href="contact.html" class="btn-primary reveal">
-    <i class="fa-solid fa-paper-plane"></i> Get in Touch
+    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Get in Touch
   </a>
 </section>
 
@@ -181,10 +182,10 @@
 
     <div>
       <h4>Social</h4>
-      <div class="socials">
-        <i class="fa-brands fa-github"></i>
-        <i class="fa-brands fa-x-twitter"></i>
-        <i class="fa-brands fa-discord"></i>
+      <div class="socials" aria-hidden="false">
+        <i class="fa-brands fa-github" aria-hidden="true"></i>
+        <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+        <i class="fa-brands fa-discord" aria-hidden="true"></i>
       </div>
     </div>
   </div>
