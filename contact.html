@@ -25,21 +25,22 @@
 <header class="navbar">
   <div class="logo">NOVA</div>
 
-    <img src="assets/euro.png" alt="Euro Icon" class="corner-euro">
-  
-  <!-- MOBILE TOGGLE (ADDED) -->
-  <div class="nav-toggle">
-    <i class="fa-solid fa-bars"></i>
+  <img src="assets/euro.png" alt="Euro Icon" class="corner-euro" loading="lazy" width="60" height="60">
+
+  <!-- MOBILE TOGGLE (accessible attributes added) -->
+  <div class="nav-toggle" role="button" aria-controls="primary-navigation" aria-expanded="false" tabindex="0">
+    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    <span class="sr-only" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Toggle navigation</span>
   </div>
 
-  <!-- NAV LINKS (FIXED) -->
-  <nav class="nav-links">
+  <!-- NAV LINKS (fixed + accessibility) -->
+  <nav id="primary-navigation" class="nav-links" role="navigation" aria-label="Main Navigation">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="projects.html">Projects</a>
     <a href="showcase.html">Showcase</a>
     <a href="resources.html">Resources</a>
-    <a href="contact.html" class="active btn-nav">Contact</a>
+    <a href="contact.html" class="active btn-nav" aria-current="page">Contact</a>
   </nav>
 </header>
 
@@ -58,87 +59,89 @@
   <div class="contact-grid">
 
     <!-- CONTACT INFO -->
-    <div class="contact-info reveal card">
-      <h2>Get in Touch</h2>
+    <div class="contact-info reveal card" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Get in Touch</h2>
       <p>
         NOVA is open to collaboration, research discussions,
         feedback, and general inquiries.
       </p>
 
       <div class="contact-item">
-        <i class="fa-solid fa-envelope"></i>
+        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
         <span>contact@nova-projects.dev</span>
       </div>
 
-    <div class="contact-item">
-  <i class="fa-solid fa-location-dot"></i>
+      <div class="contact-item">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
 
-  <span class="address-text">
-    Şelale Caddesi, Ata Sokağı No: 3/2, Bahçeşehir 2. Kısım, 34538 Başakşehir/İstanbul, Türkiye
-  </span>
+        <span class="address-text">
+          Şelale Caddesi, Ata Sokağı No: 3/2, Bahçeşehir 2. Kısım, 34538 Başakşehir/İstanbul, Türkiye
+        </span>
 
-  <a href="https://maps.app.goo.gl/JwSKRPpYVvVxkBtF8"
-     target="_blank"
-     class="map-button">
-    See Location
-  </a>
-</div>
+        <a href="https://maps.app.goo.gl/JwSKRPpYVvVxkBtF8"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="map-button">
+          See Location
+        </a>
+      </div>
 
- <div class="contact-item">
-  <i class="fa-solid fa-location-dot"></i>
+      <div class="contact-item">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
 
-  <span class="address-text">
-    Tolstraat 11, 2405 VS Alphen aan den Rijn, Netherlands
-  </span>
+        <span class="address-text">
+          Tolstraat 11, 2405 VS Alphen aan den Rijn, Netherlands
+        </span>
 
-  <a href="https://maps.app.goo.gl/jeW9BwgnZKD7Y4cv6"
-     target="_blank"
-     class="map-button">
-    See Location
-  </a>
-</div>
+        <a href="https://maps.app.goo.gl/jeW9BwgnZKD7Y4cv6"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="map-button">
+          See Location
+        </a>
+      </div>
       
       <div class="contact-item">
-        <i class="fa-solid fa-clock"></i>
+        <i class="fa-solid fa-clock" aria-hidden="true"></i>
         <span>Response time: 24–48 hours</span>
       </div>
 
-      <div class="socials large">
-        <i class="fa-brands fa-github"></i>
-        <i class="fa-brands fa-x-twitter"></i>
-        <i class="fa-brands fa-discord"></i>
+      <div class="socials large" aria-hidden="false">
+        <i class="fa-brands fa-github" aria-hidden="true"></i>
+        <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+        <i class="fa-brands fa-discord" aria-hidden="true"></i>
       </div>
     </div>
 
     <!-- FORM -->
-    <form class="contact-form reveal card">
-      <h2>Send a Message</h2>
+    <form class="contact-form reveal card" role="form" aria-labelledby="send-heading">
+      <h2 id="send-heading">Send a Message</h2>
 
       <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" placeholder="Your name" required>
+        <label for="name">Full Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required>
       </div>
 
       <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" placeholder="you@example.com" required>
+        <label for="email">Email Address</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required>
       </div>
 
       <div class="form-group">
-        <label>Subject</label>
-        <input type="text" placeholder="Project inquiry / Feedback / Other">
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" type="text" placeholder="Project inquiry / Feedback / Other">
       </div>
 
       <div class="form-group">
-        <label>Message</label>
-        <textarea rows="6" placeholder="Write your message here..." required></textarea>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" placeholder="Write your message here..." required></textarea>
       </div>
 
       <button type="submit" class="btn-primary">
-        <i class="fa-solid fa-paper-plane"></i> Send Message
+        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send Message
       </button>
 
-      <p class="form-note">
+      <p class="form-note" id="form-note">
         This form is currently for demonstration purposes.
         Backend integration can be added later.
       </p>
@@ -200,10 +203,10 @@
 
     <div>
       <h4>Social</h4>
-      <div class="socials">
-        <i class="fa-brands fa-github"></i>
-        <i class="fa-brands fa-x-twitter"></i>
-        <i class="fa-brands fa-discord"></i>
+      <div class="socials" aria-hidden="false">
+        <i class="fa-brands fa-github" aria-hidden="true"></i>
+        <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+        <i class="fa-brands fa-discord" aria-hidden="true"></i>
       </div>
     </div>
   </div>
