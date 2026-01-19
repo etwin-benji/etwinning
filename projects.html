@@ -7,6 +7,8 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css" />
+  <!-- Project-specific styles -->
+  <link rel="stylesheet" href="css/projects.css" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +20,7 @@
 
   <!-- JS -->
   <script defer src="js/main.js"></script>
+  <script defer src="js/projects.js"></script>
 </head>
 <body>
 
@@ -52,109 +55,155 @@
   </p>
 </section>
 
-<!-- PROJECTS SECTION -->
-<section class="section">
+<!-- PROJECTS SECTION (SHOWCASE) -->
+<section class="section projects-section">
 
-  <h2 class="section-title reveal">Active Projects</h2>
+  <h2 class="section-title reveal">Projects Showcase</h2>
 
-  <div class="card-grid">
+  <!-- Grid of project cards — 6 placeholders you can replace -->
+  <div class="projects-grid">
 
-    <!-- PROJECT 1 -->
-    <div class="card reveal">
-      <i class="fa-solid fa-brain"></i>
-      <h3>AI Research Hub</h3>
-      <p>
-        The AI Research Hub is a long-term project dedicated to exploring artificial
-        intelligence, machine learning models, and their ethical implications.
-      </p>
-      <p>
-        Topics include neural networks, natural language processing, computer vision,
-        and responsible AI deployment.
-      </p>
-      <span class="tag">Research</span>
-      <span class="tag">AI</span>
-    </div>
+    <!-- Card template repeated 6 times: update title and media when ready -->
+    <article class="project-card" data-project-id="1">
+      <div class="project-card-top">
+        <h3 class="project-title">Project Name 1</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 1" title="Fullscreen">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+        </div>
+      </div>
 
-    <!-- PROJECT 2 -->
-    <div class="card reveal">
-      <i class="fa-solid fa-database"></i>
-      <h3>Global Data Analysis</h3>
-      <p>
-        This project focuses on collecting, cleaning, and analyzing public datasets
-        from global institutions and open-data platforms.
-      </p>
-      <p>
-        The goal is to transform complex datasets into understandable insights using
-        visualization techniques.
-      </p>
-      <span class="tag">Data</span>
-      <span class="tag">Visualization</span>
-    </div>
+      <div class="project-media" role="img" aria-label="Project 1 placeholder">
+        <!-- Inline SVG placeholder — replace with <img src="path/to/your-image.jpg" alt="..."> or background-image -->
+        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="100%" height="100%" fill="#e9e9ef"/>
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#8a8aa6" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
+        </svg>
+      </div>
 
-    <!-- PROJECT 3 -->
-    <div class="card reveal">
-      <i class="fa-solid fa-code"></i>
-      <h3>Open-Source Toolkit</h3>
-      <p>
-        A continuously expanding collection of reusable components, utilities,
-        and templates designed for modern web development.
-      </p>
-      <p>
-        All tools are documented and shared openly to support learning and collaboration.
-      </p>
-      <span class="tag">Open Source</span>
-      <span class="tag">Web</span>
-    </div>
+      <div class="project-body">
+        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
+        <div class="project-tags">
+          <span class="tag">Tag</span>
+        </div>
+      </div>
+    </article>
 
-  </div>
-</section>
+    <article class="project-card" data-project-id="2">
+      <div class="project-card-top">
+        <h3 class="project-title">Project Name 2</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 2" title="Fullscreen">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+        </div>
+      </div>
+      <div class="project-media" role="img" aria-label="Project 2 placeholder">
+        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="100%" height="100%" fill="#f3f3f8"/>
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#9b9bb7" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
+        </svg>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
+        <div class="project-tags">
+          <span class="tag">Tag</span>
+        </div>
+      </div>
+    </article>
 
-<!-- SECOND PROJECT GROUP -->
-<section class="section alt-bg">
+    <article class="project-card" data-project-id="3">
+      <div class="project-card-top">
+        <h3 class="project-title">Project Name 3</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 3" title="Fullscreen">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+        </div>
+      </div>
+      <div class="project-media" role="img" aria-label="Project 3 placeholder">
+        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="100%" height="100%" fill="#eef0f6"/>
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#a0a0be" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
+        </svg>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
+        <div class="project-tags">
+          <span class="tag">Tag</span>
+        </div>
+      </div>
+    </article>
 
-  <h2 class="section-title reveal">Experimental Initiatives</h2>
+    <article class="project-card" data-project-id="4">
+      <div class="project-card-top">
+        <h3 class="project-title">Project Name 4</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 4" title="Fullscreen">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+        </div>
+      </div>
+      <div class="project-media" role="img" aria-label="Project 4 placeholder">
+        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="100%" height="100%" fill="#f6f6fb"/>
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#b0b0c8" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
+        </svg>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
+        <div class="project-tags">
+          <span class="tag">Tag</span>
+        </div>
+      </div>
+    </article>
 
-  <div class="card-grid">
+    <article class="project-card" data-project-id="5">
+      <div class="project-card-top">
+        <h3 class="project-title">Project Name 5</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 5" title="Fullscreen">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+        </div>
+      </div>
+      <div class="project-media" role="img" aria-label="Project 5 placeholder">
+        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="100%" height="100%" fill="#ededf2"/>
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#9e9eb5" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
+        </svg>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
+        <div class="project-tags">
+          <span class="tag">Tag</span>
+        </div>
+      </div>
+    </article>
 
-    <div class="card reveal">
-      <i class="fa-solid fa-network-wired"></i>
-      <h3>Distributed Systems Lab</h3>
-      <p>
-        An experimental environment for studying distributed systems, scalability,
-        and fault tolerance in modern infrastructures.
-      </p>
-      <p>
-        This initiative focuses on understanding how large-scale systems operate
-        under real-world conditions.
-      </p>
-      <span class="tag">Systems</span>
-    </div>
-
-    <div class="card reveal">
-      <i class="fa-solid fa-palette"></i>
-      <h3>Design Systems Study</h3>
-      <p>
-        A research-driven exploration of design systems, UI consistency, accessibility,
-        and user-centered interfaces.
-      </p>
-      <p>
-        The project combines visual design with practical implementation strategies.
-      </p>
-      <span class="tag">Design</span>
-    </div>
-
-    <div class="card reveal">
-      <i class="fa-solid fa-chart-line"></i>
-      <h3>Trend Analysis Reports</h3>
-      <p>
-        Periodic reports analyzing emerging trends in technology, development tools,
-        and digital workflows.
-      </p>
-      <p>
-        Each report is backed by research and real-world observations.
-      </p>
-      <span class="tag">Analysis</span>
-    </div>
+    <article class="project-card" data-project-id="6">
+      <div class="project-card-top">
+        <h3 class="project-title">Project Name 6</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 6" title="Fullscreen">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+        </div>
+      </div>
+      <div class="project-media" role="img" aria-label="Project 6 placeholder">
+        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="100%" height="100%" fill="#f0f1f7"/>
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#8f90ab" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
+        </svg>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
+        <div class="project-tags">
+          <span class="tag">Tag</span>
+        </div>
+      </div>
+    </article>
 
   </div>
 </section>
