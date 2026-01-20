@@ -7,7 +7,6 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css" />
-  <!-- Project-specific styles -->
   <link rel="stylesheet" href="css/projects.css" />
 
   <!-- Fonts -->
@@ -27,15 +26,10 @@
 <!-- NAVBAR -->
 <header class="navbar">
   <div class="logo">NOVA</div>
-
-    <img src="assets/euro.png" alt="Euro Icon" class="corner-euro">
-  
-  <!-- MOBILE TOGGLE (ADDED – REQUIRED) -->
+  <img src="assets/euro.png" alt="Euro Icon" class="corner-euro">
   <div class="nav-toggle">
     <i class="fa-solid fa-bars"></i>
   </div>
-
-  <!-- NAV LINKS (CLASS FIXED) -->
   <nav class="nav-links">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -57,248 +51,361 @@
 
 <!-- PROJECTS SECTION (SHOWCASE) -->
 <section class="section projects-section">
-
   <h2 class="section-title reveal">Projects Showcase</h2>
 
-  <!-- Grid of project cards — 6 placeholders you can replace -->
   <div class="projects-grid">
 
-    <!-- Card template repeated 6 times: update title and media when ready -->
+    <!-- 1 -->
     <article class="project-card" data-project-id="1">
       <div class="project-card-top">
-        <h3 class="project-title">Project Name 1</h3>
+        <h3 class="project-title">1.berna bozkurt & egehan ergul / marit & frederique  (pdf)</h3>
         <div class="project-actions">
-          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 1" title="Fullscreen">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen">
             <i class="fa-solid fa-expand"></i>
           </button>
         </div>
       </div>
-
-      <div class="project-media" role="img" aria-label="Project 1 placeholder">
-        <!-- Inline SVG placeholder — replace with <img src="path/to/your-image.jpg" alt="..."> or background-image -->
-        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="100%" height="100%" fill="#e9e9ef"/>
-          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#8a8aa6" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
-        </svg>
+      <div class="project-media" role="document" aria-label="Project 1 PDF">
+        <iframe src="assets/01-berna-bozkurt_egehan-ergul-marit-frederique.pdf" title="Project 1 PDF"></iframe>
       </div>
-
       <div class="project-body">
-        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
-        <div class="project-tags">
-          <span class="tag">Tag</span>
-        </div>
+        <p class="project-desc">PDF document. Click fullscreen to view.</p>
+        <div class="project-tags"><span class="tag">PDF</span></div>
       </div>
     </article>
 
+    <!-- 2 -->
     <article class="project-card" data-project-id="2">
       <div class="project-card-top">
-        <h3 class="project-title">Project Name 2</h3>
+        <h3 class="project-title">2.Ada Oğur & Serra Erkil / Isa & Maddie   (pdf)</h3>
         <div class="project-actions">
-          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 2" title="Fullscreen">
-            <i class="fa-solid fa-expand"></i>
-          </button>
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
         </div>
       </div>
-      <div class="project-media" role="img" aria-label="Project 2 placeholder">
-        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="100%" height="100%" fill="#f3f3f8"/>
-          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#9b9bb7" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
-        </svg>
+      <div class="project-media" role="document" aria-label="Project 2 PDF">
+        <iframe src="assets/02-Ada-Ogur_Serra-Erkil-Isa-Maddie.pdf" title="Project 2 PDF"></iframe>
       </div>
       <div class="project-body">
-        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
-        <div class="project-tags">
-          <span class="tag">Tag</span>
-        </div>
+        <p class="project-desc">PDF document.</p>
+        <div class="project-tags"><span class="tag">PDF</span></div>
       </div>
     </article>
 
+    <!-- 3 -->
     <article class="project-card" data-project-id="3">
       <div class="project-card-top">
-        <h3 class="project-title">Project Name 3</h3>
+        <h3 class="project-title">3. Hira Yener & Almira Yener / İse & Fenne (mp4)</h3>
         <div class="project-actions">
-          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 3" title="Fullscreen">
-            <i class="fa-solid fa-expand"></i>
-          </button>
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
         </div>
       </div>
-      <div class="project-media" role="img" aria-label="Project 3 placeholder">
-        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="100%" height="100%" fill="#eef0f6"/>
-          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#a0a0be" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
-        </svg>
+      <div class="project-media" role="group" aria-label="Project 3 video">
+        <video controls playsinline poster="assets/03-poster.jpg">
+          <source src="assets/03-Hira-Yener_Almira-Yener-Ise-Fenne.mp4" type="video/mp4">
+          Your browser doesn't support embedded video. <a href="assets/03-Hira-Yener_Almira-Yener-Ise-Fenne.mp4">Download</a>.
+        </video>
       </div>
       <div class="project-body">
-        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
-        <div class="project-tags">
-          <span class="tag">Tag</span>
-        </div>
+        <p class="project-desc">MP4 video.</p>
+        <div class="project-tags"><span class="tag">Video</span></div>
       </div>
     </article>
 
+    <!-- 4 -->
     <article class="project-card" data-project-id="4">
       <div class="project-card-top">
-        <h3 class="project-title">Project Name 4</h3>
+        <h3 class="project-title">4.Hasret Barlık & Gaye Rabia Gül / Lars & Lenn  (mp4)</h3>
         <div class="project-actions">
-          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 4" title="Fullscreen">
-            <i class="fa-solid fa-expand"></i>
-          </button>
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
         </div>
       </div>
-      <div class="project-media" role="img" aria-label="Project 4 placeholder">
-        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="100%" height="100%" fill="#f6f6fb"/>
-          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#b0b0c8" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
-        </svg>
+      <div class="project-media" role="group" aria-label="Project 4 video">
+        <video controls playsinline poster="assets/04-poster.jpg">
+          <source src="assets/04-Hasret-Barlik_Gaye-Rabia-Gul-Lars-Lenn.mp4" type="video/mp4">
+          Your browser doesn't support embedded video. <a href="assets/04-Hasret-Barlik_Gaye-Rabia-Gul-Lars-Lenn.mp4">Download</a>.
+        </video>
       </div>
       <div class="project-body">
-        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
-        <div class="project-tags">
-          <span class="tag">Tag</span>
-        </div>
+        <p class="project-desc">MP4 video.</p>
+        <div class="project-tags"><span class="tag">Video</span></div>
       </div>
     </article>
 
+    <!-- 5 -->
     <article class="project-card" data-project-id="5">
       <div class="project-card-top">
-        <h3 class="project-title">Project Name 5</h3>
+        <h3 class="project-title">5. Gülsüm Çetinkaya & Ecrin Yağmur Baycan / Max & Kyan   (pdf)</h3>
         <div class="project-actions">
-          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 5" title="Fullscreen">
-            <i class="fa-solid fa-expand"></i>
-          </button>
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
         </div>
       </div>
-      <div class="project-media" role="img" aria-label="Project 5 placeholder">
-        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="100%" height="100%" fill="#ededf2"/>
-          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#9e9eb5" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
-        </svg>
+      <div class="project-media" role="document" aria-label="Project 5 PDF">
+        <iframe src="assets/05-Gulsum-Cetinkaya_Ecrin-Yağmur-Baycan-Max-Kyan.pdf" title="Project 5 PDF"></iframe>
       </div>
       <div class="project-body">
-        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
-        <div class="project-tags">
-          <span class="tag">Tag</span>
-        </div>
+        <p class="project-desc">PDF document.</p>
+        <div class="project-tags"><span class="tag">PDF</span></div>
       </div>
     </article>
 
+    <!-- 6 -->
     <article class="project-card" data-project-id="6">
       <div class="project-card-top">
-        <h3 class="project-title">Project Name 6</h3>
+        <h3 class="project-title">6.özüm Bozdoğan & elif Ece Vursavuş / gwen & veronique (pdf)</h3>
         <div class="project-actions">
-          <button class="btn-fullscreen" aria-label="Enter fullscreen for Project Name 6" title="Fullscreen">
-            <i class="fa-solid fa-expand"></i>
-          </button>
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
         </div>
       </div>
-      <div class="project-media" role="img" aria-label="Project 6 placeholder">
-        <svg class="placeholder-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="100%" height="100%" fill="#f0f1f7"/>
-          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#8f90ab" font-family="Inter, Arial" font-size="18">Project image placeholder</text>
-        </svg>
+      <div class="project-media" role="document" aria-label="Project 6 PDF">
+        <iframe src="assets/06-ozum-Bozdogan_elif-Ece-Vursavus-gwen-veronique.pdf" title="Project 6 PDF"></iframe>
       </div>
       <div class="project-body">
-        <p class="project-desc">Short description placeholder. Replace with a one-line summary of the project.</p>
-        <div class="project-tags">
-          <span class="tag">Tag</span>
+        <p class="project-desc">PDF document.</p>
+        <div class="project-tags"><span class="tag">PDF</span></div>
+      </div>
+    </article>
+
+    <!-- 7 -->
+    <article class="project-card" data-project-id="7">
+      <div class="project-card-top">
+        <h3 class="project-title">7.Melike Su Eylül Özdemir & Bengisu Kırdar / Jamie & Ruben (docx)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
         </div>
+      </div>
+      <div class="project-media" aria-label="Project 7 docx">
+        <a href="assets/07-MelikeSuEylulOzdemir_BengisuKirdar-Jamie-Ruben.docx" download>Download .docx</a>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">DOCX file — use the download link.</p>
+        <div class="project-tags"><span class="tag">DOCX</span></div>
+      </div>
+    </article>
+
+    <!-- 8 -->
+    <article class="project-card" data-project-id="8">
+      <div class="project-card-top">
+        <h3 class="project-title">8.Meleknur Çakmak & İlknur Zeybek & Nisa Cengiz / Sven & Shayan & Stijn (mp4)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+      </div>
+      <div class="project-media" role="group" aria-label="Project 8 video">
+        <video controls playsinline poster="assets/08-poster.jpg">
+          <source src="assets/08-MeleknurCakmak_IlknurZeybek_NisaCengiz-Sven-Shayan-Stijn.mp4" type="video/mp4">
+          Your browser doesn't support embedded video. <a href="assets/08-MeleknurCakmak_IlknurZeybek_NisaCengiz-Sven-Shayan-Stijn.mp4">Download</a>.
+        </video>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">MP4 video.</p>
+        <div class="project-tags"><span class="tag">Video</span></div>
+      </div>
+    </article>
+
+    <!-- 9 -->
+    <article class="project-card" data-project-id="9">
+      <div class="project-card-top">
+        <h3 class="project-title">9.Lamiya Sadık & Rabia Sultan Çırak & Iremsu Uzun / Fleur & Zoe (pdf)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+      </div>
+      <div class="project-media" role="document" aria-label="Project 9 PDF">
+        <iframe src="assets/09-Lamiya-Sadik_Rabia-Sultan-Cirak_Iremsu-Uzun-Fleur-Zoe.pdf" title="Project 9 PDF"></iframe>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">PDF document.</p>
+        <div class="project-tags"><span class="tag">PDF</span></div>
+      </div>
+    </article>
+
+    <!-- 10 -->
+    <article class="project-card" data-project-id="10">
+      <div class="project-card-top">
+        <h3 class="project-title">10. Doğa Öntaş & Beren Öksüz / Elise & Hanna (mp4)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+      </div>
+      <div class="project-media" role="group" aria-label="Project 10 video">
+        <video controls playsinline poster="assets/10-poster.jpg">
+          <source src="assets/10-Doga-Ontas_Beren-Oksuz-Elise-Hanna.mp4" type="video/mp4">
+          Your browser doesn't support embedded video. <a href="assets/10-Doga-Ontas_Beren-Oksuz-Elise-Hanna.mp4">Download</a>.
+        </video>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">MP4 video.</p>
+        <div class="project-tags"><span class="tag">Video</span></div>
+      </div>
+    </article>
+
+    <!-- 11 -->
+    <article class="project-card" data-project-id="11">
+      <div class="project-card-top">
+        <h3 class="project-title">11.Melodi Yaman & Zeynep Selen Yıldırım & Zehra Özmen / Lieke & Elisa & Amelia (pdf)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+      </div>
+      <div class="project-media" role="document" aria-label="Project 11 PDF">
+        <iframe src="assets/11-MelodiYaman_ZeynepSelenYildirim_ZehraOzmen-Lieke-Elisa-Amelia.pdf" title="Project 11 PDF"></iframe>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">PDF document.</p>
+        <div class="project-tags"><span class="tag">PDF</span></div>
+      </div>
+    </article>
+
+    <!-- 12 -->
+    <article class="project-card" data-project-id="12">
+      <div class="project-card-top">
+        <h3 class="project-title">12. Ayse Nisa akhan & Nil başak yıldırım & Simay aydın / Samira & Lisanne & Sanne (pdf)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+      </div>
+      <div class="project-media" role="document" aria-label="Project 12 PDF">
+        <iframe src="assets/12-AyseNisaAkhan_NilBasakYildirim_SimayAydin-Samira-Lisanne-Sanne.pdf" title="Project 12 PDF"></iframe>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">PDF document.</p>
+        <div class="project-tags"><span class="tag">PDF</span></div>
+      </div>
+    </article>
+
+    <!-- 13 -->
+    <article class="project-card" data-project-id="13">
+      <div class="project-card-top">
+        <h3 class="project-title">13.Nehir mutlu & Ecrin tuğba öner (pdf)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+      </div>
+      <div class="project-media" role="document" aria-label="Project 13 PDF">
+        <iframe src="assets/13-Nehir-Mutlu_Ecrin-Tugba-Oner.pdf" title="Project 13 PDF"></iframe>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">PDF document.</p>
+        <div class="project-tags"><span class="tag">PDF</span></div>
+      </div>
+    </article>
+
+    <!-- 14 -->
+    <article class="project-card" data-project-id="14">
+      <div class="project-card-top">
+        <h3 class="project-title">14.elif yücel & ipek gülcem yücel & azra ceylan / niels de jong & tim boose & matts arbouw (docx)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+      </div>
+      <div class="project-media" aria-label="Project 14 docx">
+        <a href="assets/14-elif-yucel_ipek-gulcem-yucel_azra-ceylan-niels-tim-matts.docx" download>Download .docx</a>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">DOCX file — use the download link.</p>
+        <div class="project-tags"><span class="tag">DOCX</span></div>
+      </div>
+    </article>
+
+    <!-- 15 -->
+    <article class="project-card" data-project-id="15">
+      <div class="project-card-top">
+        <h3 class="project-title">15.Miray su ayvaz & Belinay Patan / Eva & Robin (png)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+      </div>
+      <div class="project-media" role="img" aria-label="Project 15 image">
+        <img src="assets/15-MiraySuAyvaz_BelinayPatan-Eva-Robin.png" alt="Project 15 image">
+      </div>
+      <div class="project-body">
+        <p class="project-desc">PNG image.</p>
+        <div class="project-tags"><span class="tag">Image</span></div>
+      </div>
+    </article>
+
+    <!-- 16 (two assets: pptx + pdf, slide feature) -->
+    <article class="project-card" data-project-id="16">
+      <div class="project-card-top">
+        <h3 class="project-title">16. Öznur Akboğa & Songül Uzunalioğlu / Dorine & Laura (pptx / pdf)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+      </div>
+      <div class="project-media" role="document" aria-label="Project 16 slides">
+        <div class="slides-controls">
+          <button class="slide-btn" data-src="assets/16-OznurAkboga_SongulUzunaliloglu-Dorine-Laura.pdf">View PDF</button>
+          <button class="slide-btn" data-src="assets/16-OznurAkboga_SongulUzunaliloglu-Dorine-Laura.pptx">Open PPTX</button>
+        </div>
+        <iframe class="slide-frame" src="assets/16-OznurAkboga_SongulUzunaliloglu-Dorine-Laura.pdf" title="Project 16 PDF"></iframe>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">PPTX (download/open) + PDF (viewable). Use the buttons above.</p>
+        <div class="project-tags"><span class="tag">Slides</span></div>
+      </div>
+    </article>
+
+    <!-- 17 -->
+    <article class="project-card" data-project-id="17">
+      <div class="project-card-top">
+        <h3 class="project-title">17.Çağla Erensoylu & Duru Demir / Hannah & Evelien (png)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+      </div>
+      <div class="project-media" role="img" aria-label="Project 17 image">
+        <img src="assets/17-Cagla-Erensoylu_Duru-Demir-Hannah-Evelien.png" alt="Project 17 image">
+      </div>
+      <div class="project-body">
+        <p class="project-desc">PNG image.</p>
+        <div class="project-tags"><span class="tag">Image</span></div>
+      </div>
+    </article>
+
+    <!-- 18 -->
+    <article class="project-card" data-project-id="18">
+      <div class="project-card-top">
+        <h3 class="project-title">18.Benyamin & Salih / Britt (docx)</h3>
+        <div class="project-actions">
+          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+      </div>
+      <div class="project-media" aria-label="Project 18 docx">
+        <a href="assets/18-Benyamin_Salih-Britt.docx" download>Download .docx</a>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">DOCX file — use the download link.</p>
+        <div class="project-tags"><span class="tag">DOCX</span></div>
       </div>
     </article>
 
   </div>
 </section>
 
-<!-- PROCESS SECTION -->
+<!-- rest of page (unchanged) -->
 <section class="section">
-
   <h2 class="section-title reveal">How Projects Are Built</h2>
-
   <div class="process-grid">
-
-    <div class="process-step reveal">
-      <span>01</span>
-      <h3>Research</h3>
-      <p>
-        Every project starts with extensive research into existing solutions,
-        academic resources, and industry practices.
-      </p>
-    </div>
-
-    <div class="process-step reveal">
-      <span>02</span>
-      <h3>Experimentation</h3>
-      <p>
-        Ideas are tested through prototypes, small experiments, and iterative builds
-        to validate assumptions.
-      </p>
-    </div>
-
-    <div class="process-step reveal">
-      <span>03</span>
-      <h3>Documentation</h3>
-      <p>
-        All findings, decisions, and results are documented clearly for transparency
-        and educational value.
-      </p>
-    </div>
-
-    <div class="process-step reveal">
-      <span>04</span>
-      <h3>Iteration</h3>
-      <p>
-        Projects are continuously refined based on new insights, feedback,
-        and technological changes.
-      </p>
-    </div>
-
+    <div class="process-step reveal"><span>01</span><h3>Research</h3><p>Every project starts with extensive research into existing solutions, academic resources, and industry practices.</p></div>
+    <div class="process-step reveal"><span>02</span><h3>Experimentation</h3><p>Ideas are tested through prototypes, small experiments, and iterative builds to validate assumptions.</p></div>
+    <div class="process-step reveal"><span>03</span><h3>Documentation</h3><p>All findings, decisions, and results are documented clearly for transparency and educational value.</p></div>
+    <div class="process-step reveal"><span>04</span><h3>Iteration</h3><p>Projects are continuously refined based on new insights, feedback, and technological changes.</p></div>
   </div>
-
 </section>
 
-<!-- CTA -->
 <section class="cta">
   <h2 class="reveal">Want to Contribute?</h2>
-  <p class="reveal">
-    We welcome feedback, collaboration ideas, and contributions from developers,
-    designers, and researchers.
-  </p>
-  <a href="contact.html" class="btn-primary reveal">
-    <i class="fa-solid fa-handshake"></i> Contact Us
-  </a>
+  <p class="reveal">We welcome feedback, collaboration ideas, and contributions from developers, designers, and researchers.</p>
+  <a href="contact.html" class="btn-primary reveal"><i class="fa-solid fa-handshake"></i> Contact Us</a>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
-    <div>
-      <h3>NOVA</h3>
-      <p>
-        Building and documenting projects that focus on long-term impact,
-        clarity, and responsible technology.
-      </p>
-    </div>
-
-    <div>
-      <h4>Navigation</h4>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="showcase.html">Showcase</a>
-      <a href="resources.html">Resources</a>
-    </div>
-
-    <div>
-      <h4>Social</h4>
-      <div class="socials">
-        <i class="fa-brands fa-github"></i>
-        <i class="fa-brands fa-x-twitter"></i>
-        <i class="fa-brands fa-discord"></i>
-      </div>
-    </div>
+    <div><h3>NOVA</h3><p>Building and documenting projects that focus on long-term impact, clarity, and responsible technology.</p></div>
+    <div><h4>Navigation</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="showcase.html">Showcase</a><a href="resources.html">Resources</a></div>
+    <div><h4>Social</h4><div class="socials"><i class="fa-brands fa-github"></i><i class="fa-brands fa-x-twitter"></i><i class="fa-brands fa-discord"></i></div></div>
   </div>
-
-  <p class="copyright">
-    © 2025 NOVA Digital Projects. All rights reserved.
-  </p>
+  <p class="copyright">© 2025 NOVA Digital Projects. All rights reserved.</p>
 </footer>
 
 </body>
