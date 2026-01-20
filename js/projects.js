@@ -1,6 +1,4 @@
-// Project fullscreen and overlay fallback logic
-// Place this file as js/projects.js (it's referenced from projects.html)
-
+// Projects: fullscreen (media preferred), overlay fallback, and slide control for multi-file card
 document.addEventListener('DOMContentLoaded', () => {
   const fullscreenButtons = document.querySelectorAll('.btn-fullscreen');
 
@@ -9,41 +7,62 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = e.currentTarget.closest('.project-card');
       if (!card) return;
 
-      // Prefer the Fullscreen API
-      try {
-        if (card.requestFullscreen) {
-          await card.requestFullscreen();
-          return;
-        } else if (card.webkitRequestFullscreen) {
-          // Safari
-          card.webkitRequestFullscreen();
-          return;
-        } else if (card.msRequestFullscreen) {
-          card.msRequestFullscreen();
-          return;
+      // Prefer to fullscreen the media element (video, iframe, img, or slide-frame)
+      const media = card.querySelector('video, .slide-frame, iframe, img');
+      if (media) {
+        try {
+          if (media.requestFullscreen) {
+            await media.requestFullscreen();
+            return;
+          } else if (media.webkitRequestFullscreen) {
+            media.webkitRequestFullscreen();
+            return;
+          } else if (media.msRequestFullscreen) {
+            media.msRequestFullscreen();
+            return;
+          }
+        } catch (err) {
+          console.warn('Fullscreen API failed on media, falling back to overlay', err);
         }
-      } catch (err) {
-        // If API fails, fall back to overlay below
-        console.warn('Fullscreen API failed, opening fallback overlay', err);
       }
 
-      // Fallback overlay: clone card content into a centered modal overlay
+      // If no media or fullscreen fails, fallback to overlay of the card
       openOverlay(card);
     });
+  });
+
+  // Slide buttons (for cards with multiple assets e.g., project 16)
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.slide-btn');
+    if (!btn) return;
+    const parentCard = btn.closest('.project-card');
+    if (!parentCard) return;
+    const frame = parentCard.querySelector('.slide-frame');
+    if (!frame) return;
+
+    const src = btn.getAttribute('data-src');
+    if (!src) return;
+
+    // If opening a non-renderable file (pptx/docx), open in new tab
+    if (src.endsWith('.pptx') || src.endsWith('.docx')) {
+      window.open(src, '_blank');
+      return;
+    }
+
+    frame.src = src;
   });
 
   // Close overlay on Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeOverlay();
-      // exit fullscreen if needed
       if (document.fullscreenElement) {
         document.exitFullscreen && document.exitFullscreen();
       }
     }
   });
 
-  // Close overlay when clicking outside the content
+  // Close overlay when clicking outside content
   document.addEventListener('click', (e) => {
     const overlay = document.querySelector('.project-overlay');
     if (!overlay) return;
@@ -54,30 +73,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Helper: create and open overlay
   function openOverlay(card) {
-    closeOverlay(); // ensure single overlay
-
+    closeOverlay();
     const overlay = document.createElement('div');
     overlay.className = 'project-overlay';
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
 
-    // Clone the card for display
-    const clone = card.cloneNode(true);
-    // Remove fullscreen buttons in the cloned view to avoid nested behavior
-    const clonedActionBtn = clone.querySelector('.project-actions');
-    if (clonedActionBtn) clonedActionBtn.remove();
-
     const overlayCard = document.createElement('div');
     overlayCard.className = 'overlay-card';
 
-    // Header with title and close
     const header = document.createElement('div');
     header.className = 'overlay-header';
     const title = document.createElement('div');
     title.className = 'overlay-title';
-    title.textContent = clone.querySelector('.project-title')?.textContent || 'Project';
+    title.textContent = card.querySelector('.project-title')?.textContent || 'Project';
     const closeBtn = document.createElement('button');
     closeBtn.className = 'overlay-close';
     closeBtn.setAttribute('aria-label', 'Close project preview');
@@ -86,28 +96,20 @@ document.addEventListener('DOMContentLoaded', () => {
     header.appendChild(title);
     header.appendChild(closeBtn);
 
-    // Body: the cloned card media + description
     const body = document.createElement('div');
-    body.className = 'overlay-body';
-    // Give it some padding
     body.style.padding = '16px';
-    // Move useful parts into overlay body
-    const media = clone.querySelector('.project-media');
-    const desc = clone.querySelector('.project-body');
-    if (media) {
-      media.style.aspectRatio = '16 / 9';
-      body.appendChild(media.cloneNode(true));
-    }
-    if (desc) {
-      body.appendChild(desc.cloneNode(true));
-    }
+
+    // Clone useful parts: media and project-body
+    const media = card.querySelector('.project-media');
+    const desc = card.querySelector('.project-body');
+    if (media) body.appendChild(media.cloneNode(true));
+    if (desc) body.appendChild(desc.cloneNode(true));
 
     overlayCard.appendChild(header);
     overlayCard.appendChild(body);
     overlay.appendChild(overlayCard);
     document.body.appendChild(overlay);
 
-    // Prevent body scroll while overlay is open
     document.documentElement.style.overflow = 'hidden';
   }
 
@@ -119,11 +121,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Also listen for fullscreenchange and clean up fallback overlay if user exits fullscreen
+  // Keep overlay in sync with fullscreen state
   ['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(evt => {
     document.addEventListener(evt, () => {
       if (!document.fullscreenElement) {
-        // user left fullscreen — nothing to do except ensure overlay is removed
         closeOverlay();
       }
     });
