@@ -1,47 +1,91 @@
-/* additions/changes to support mobile-friendly media viewing and controls */
+/* Projects layout fixes — stable card structure and mobile-safe media handling */
 
-/* Ensure media wrapper fills card area */
-.media-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  background: #f6f7fb;
-  min-height: 220px;
+/* Ensure project cards use column flex layout and stretch consistently */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(16,24,40,0.06);
+  overflow: hidden;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  min-height: 360px;            /* consistent card height */
+  max-height: none;
 }
 
-/* iframe / slide-frame / video / image fill the wrapper */
+/* Keep header/top always visible and not overlapping media */
+.project-card-top {
+  z-index: 3;
+  background: transparent;
+  padding: 14px 16px 0 16px;
+  flex: 0 0 auto;
+}
+
+/* Media container: occupies natural space and keeps aspect-ratio */
+.project-media {
+  position: relative;
+  width: 100%;
+  flex: 0 0 auto;              /* media keeps its block slot */
+  aspect-ratio: 16 / 9;        /* keep consistent display */
+  min-height: 180px;
+  background: #f6f7fb;
+  display: block;
+  overflow: hidden;
+}
+
+/* Wrapper inside project-media (used for iframe/video/image) */
+.media-wrapper {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+/* Make iframe/video/image fill wrapper correctly */
 .media-frame,
 .media-video,
 .media-img {
   width: 100%;
   height: 100%;
   border: 0;
-  object-fit: contain;
   display: block;
+  object-fit: cover;       /* crop while filling */
+  max-width: 100%;
 }
 
-/* For PDFs shown via iframe we want the frame to be scrollable and able to show multiple pages on desktop.
-   On mobile we'll hide the frame (controlled by JS) and open the file in a new tab. */
-.media-frame {
-  height: 100%;
-  min-height: 220px;
+/* For cases where you prefer entire media to be contained (no crop) */
+.media-frame.contain,
+.media-img.contain,
+.media-video.contain {
+  object-fit: contain;
 }
 
-/* media-controls: Open / Download buttons (visible on all breakpoints) */
+/* Body should be anchored at bottom — push using margin-top:auto */
+.project-body {
+  padding: 12px 16px 18px 16px;
+  margin-top: auto;        /* pushes body to bottom if media grows */
+  flex: 0 0 auto;
+}
+
+/* Media controls overlays (Open / Download / Slide buttons) */
 .media-controls {
   position: absolute;
   right: 12px;
   bottom: 12px;
   display: flex;
   gap: 8px;
-  z-index: 4;
+  z-index: 5;
+  pointer-events: auto;
 }
 
 .media-controls .btn-open,
 .media-controls .btn-download {
-  background: rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.96);
   border: 1px solid rgba(4,21,38,0.06);
   padding: 8px 10px;
   border-radius: 8px;
@@ -52,56 +96,60 @@
   font-size: 0.9rem;
 }
 
-/* Slides controls (for multi-asset cards) */
+/* Slide buttons positioned top-left */
 .slides-controls {
   position: absolute;
   top: 8px;
   left: 8px;
   display: flex;
   gap: 8px;
-  z-index: 4;
-}
-.slide-btn {
-  padding: 6px 8px;
-  border-radius: 8px;
-  background: rgba(79,70,229,0.08);
-  color: #4f46e5;
-  border: none;
-  cursor: pointer;
-  font-size: 0.85rem;
+  z-index: 5;
 }
 
-/* Make the iframe content scrollable on desktop */
-.media-frame {
-  overflow: auto;
+/* Keep project grid aligned items stretched so cards have uniform heights */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  align-items: stretch; /* important */
 }
 
-/* When images are used inside the iframe via src pointing to image, some browsers don't render properly.
-   slide-frame may host an image URL: ensure it displays via object-fit */
-.slide-frame[src$=".png"],
-.slide-frame[src$=".jpg"],
-.slide-frame[src$=".jpeg"] {
-  object-fit: contain;
+/* Make sure overlays/cloned elements inside overlay don't inherit absolute positioning conflicts */
+.project-overlay .overlay-card .media-wrapper {
+  position: static;
+  width: 100%;
+  height: auto;
 }
 
-/* Mobile adjustments: hide embedded PDF frame for small screens (JS will enforce),
-   keep buttons visible so users can "Open" in native viewer (recommended on phones) */
-@media (max-width: 768px) {
+/* Mobile-specific: prefer open-in-native for PDFs / pptx, ensure media controls are tappable */
+@media (max-width: 820px) {
+  .project-card { min-height: 300px; }
+
+  /* Reduce aspect-ratio on small screens so cards don't become extremely tall */
+  .project-media { aspect-ratio: 4 / 3; min-height: 160px; }
+
+  /* Make media controls larger for touch */
+  .media-controls .btn-open,
+  .media-controls .btn-download { padding: 10px 12px; font-size: 0.95rem; }
+
+  /* If you hide embedded PDF on mobile via JS, the wrapper will still preserve spacing */
   .media-frame.media-pdf-hidden {
     display: none !important;
   }
-
-  .media-controls {
-    right: 8px;
-    bottom: 8px;
-  }
 }
 
-/* Small polish: ensure download buttons visible on low-res */
-@media (max-width: 420px) {
-  .media-controls .btn-open,
-  .media-controls .btn-download {
-    padding: 6px 8px;
-    font-size: 0.82rem;
-  }
+/* Small polish */
+.project-title { font-size: 1rem; margin: 0; font-weight: 700; }
+.project-desc { margin: 0 0 8px 0; color: var(--text-muted); font-size: 0.98rem; }
+.tag { font-size: 0.78rem; padding: 6px 8px; border-radius: 8px; }
+
+/* Ensure no global .card rules conflict by being more specific if needed */
+.card .project-card,
+.project-card.card {
+  width: 100%;
+}
+
+/* safety: avoid absolute elements taking space away from the document flow */
+.project-media > *:not(.media-controls):not(.slides-controls) {
+  pointer-events: auto;
 }
