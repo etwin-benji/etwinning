@@ -1,37 +1,99 @@
-// Projects: fullscreen (media preferred), overlay fallback, and slide control for multi-file card
+// Enhanced fullscreen handling with mobile fallbacks.
+// Place as js/projects.js (replaces the previous file)
+
 document.addEventListener('DOMContentLoaded', () => {
   const fullscreenButtons = document.querySelectorAll('.btn-fullscreen');
 
+  // Use pointerup so it works reliably on touch & mouse
   fullscreenButtons.forEach(btn => {
-    btn.addEventListener('click', async (e) => {
+    btn.addEventListener('pointerup', async (e) => {
+      // Ensure this is the primary pointer (avoid secondary-button triggers)
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+
       const card = e.currentTarget.closest('.project-card');
       if (!card) return;
 
-      // Prefer to fullscreen the media element (video, iframe, img, or slide-frame)
-      const media = card.querySelector('video, .slide-frame, iframe, img');
-      if (media) {
-        try {
-          if (media.requestFullscreen) {
-            await media.requestFullscreen();
-            return;
-          } else if (media.webkitRequestFullscreen) {
-            media.webkitRequestFullscreen();
-            return;
-          } else if (media.msRequestFullscreen) {
-            media.msRequestFullscreen();
+      // Prefer the most suitable media element within the card
+      const video = card.querySelector('video');
+      const slideFrame = card.querySelector('.slide-frame');
+      const iframe = card.querySelector('iframe:not(.slide-frame)');
+      const img = card.querySelector('img');
+
+      // Try fullscreen on the best candidate in order: video -> slideFrame -> iframe -> img -> card
+      try {
+        if (video) {
+          // iOS Safari exposes webkitEnterFullscreen() for native fullscreen on videos
+          if (typeof video.webkitEnterFullscreen === 'function') {
+            // some iOS versions require a play call before entering native fullscreen
+            try { await video.play(); } catch (_) { /* ignore play errors */ }
+            video.webkitEnterFullscreen();
             return;
           }
-        } catch (err) {
-          console.warn('Fullscreen API failed on media, falling back to overlay', err);
+
+          if (video.requestFullscreen) {
+            await video.requestFullscreen();
+            return;
+          } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen();
+            return;
+          } else if (video.msRequestFullscreen) {
+            video.msRequestFullscreen();
+            return;
+          }
         }
+
+        if (slideFrame) {
+          // slideFrame is usually an iframe showing a PDF/image — try fullscreen
+          if (slideFrame.requestFullscreen) {
+            await slideFrame.requestFullscreen();
+            return;
+          } else if (slideFrame.webkitRequestFullscreen) {
+            slideFrame.webkitRequestFullscreen();
+            return;
+          } else if (slideFrame.msRequestFullscreen) {
+            slideFrame.msRequestFullscreen();
+            return;
+          }
+        }
+
+        if (iframe) {
+          // Iframes may be blocked by some browsers when cross-origin.
+          if (iframe.requestFullscreen) {
+            await iframe.requestFullscreen();
+            return;
+          } else if (iframe.webkitRequestFullscreen) {
+            iframe.webkitRequestFullscreen();
+            return;
+          } else if (iframe.msRequestFullscreen) {
+            iframe.msRequestFullscreen();
+            return;
+          }
+        }
+
+        if (img) {
+          if (img.requestFullscreen) {
+            await img.requestFullscreen();
+            return;
+          } else if (img.webkitRequestFullscreen) {
+            img.webkitRequestFullscreen();
+            return;
+          } else if (img.msRequestFullscreen) {
+            img.msRequestFullscreen();
+            return;
+          }
+        }
+      } catch (err) {
+        // If any fullscreen attempt throws, we'll fall back to overlay below
+        // (Common for cross-origin iframes or restrictive mobile browsers)
+        console.warn('Fullscreen attempt failed, falling back to overlay', err);
       }
 
-      // If no media or fullscreen fails, fallback to overlay of the card
+      // Fallback: open overlay modal (cloned card)
       openOverlay(card);
     });
   });
 
-  // Slide buttons (for cards with multiple assets e.g., project 16)
+  // Slide buttons (for cards with multiple assets e.g., project 16/17)
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.slide-btn');
     if (!btn) return;
@@ -43,12 +105,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const src = btn.getAttribute('data-src');
     if (!src) return;
 
-    // If opening a non-renderable file (pptx/docx), open in new tab
-    if (src.endsWith('.pptx') || src.endsWith('.docx')) {
+    // If non-renderable file, open in a new tab
+    if (/\.(pptx|docx)$/i.test(src)) {
       window.open(src, '_blank');
       return;
     }
 
+    // For images, if the slide-frame is an iframe we can set src to the image
     frame.src = src;
   });
 
@@ -73,8 +136,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Keep overlay in sync with fullscreen state
+  ['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(evt => {
+    document.addEventListener(evt, () => {
+      if (!document.fullscreenElement) {
+        closeOverlay();
+      } else {
+        // If user entered real fullscreen, remove any fallback overlay just in case
+        closeOverlay();
+      }
+    });
+  });
+
+  // Overlay helpers (same UX fallback as before)
   function openOverlay(card) {
-    closeOverlay();
+    closeOverlay(); // ensure single overlay
+
     const overlay = document.createElement('div');
     overlay.className = 'project-overlay';
     overlay.setAttribute('role', 'dialog');
@@ -110,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.appendChild(overlayCard);
     document.body.appendChild(overlay);
 
+    // Prevent body scroll while overlay is open
     document.documentElement.style.overflow = 'hidden';
   }
 
@@ -120,13 +198,4 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.style.overflow = '';
     }
   }
-
-  // Keep overlay in sync with fullscreen state
-  ['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(evt => {
-    document.addEventListener(evt, () => {
-      if (!document.fullscreenElement) {
-        closeOverlay();
-      }
-    });
-  });
 });
