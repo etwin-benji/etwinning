@@ -1,101 +1,65 @@
-/* Projects showcase styles (drop into css/projects.css) */
+/* additions/changes to support mobile-friendly media viewing and controls */
 
-.projects-section {
-  padding-top: 2rem;
-  padding-bottom: 3rem;
-}
-
-/* Grid layout */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
-  margin-top: 1.5rem;
-}
-
-/* Card */
-.project-card {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(16,24,40,0.06);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 200ms ease, box-shadow 200ms ease;
-  min-height: 360px;
-}
-
-.project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(16,24,40,0.08);
-}
-
-.project-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 16px 0 16px;
-  gap: 8px;
-}
-
-.project-title {
-  font-size: 1.02rem;
-  margin: 0;
-  font-weight: 600;
-}
-
-/* Actions (fullscreen) */
-.project-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-fullscreen {
-  background: transparent;
-  border: none;
-  color: #333;
-  padding: 8px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.95rem;
-}
-.btn-fullscreen:hover {
-  background: rgba(0,0,0,0.05);
-}
-
-/* Media area */
-.project-media {
-  width: 100%;
-  aspect-ratio: 16/9;
-  display: block;
-  background: #f6f7fb;
-  display: grid;
-  place-items: center;
+/* Ensure media wrapper fills card area */
+.media-wrapper {
   position: relative;
-}
-
-.project-media img,
-.project-media svg,
-.project-media video,
-.project-media iframe,
-.project-media audio {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
-  border: 0;
+  display: grid;
+  place-items: center;
+  background: #f6f7fb;
+  min-height: 220px;
 }
 
-/* For slide iframe */
-.slides-controls {
+/* iframe / slide-frame / video / image fill the wrapper */
+.media-frame,
+.media-video,
+.media-img {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: contain;
+  display: block;
+}
+
+/* For PDFs shown via iframe we want the frame to be scrollable and able to show multiple pages on desktop.
+   On mobile we'll hide the frame (controlled by JS) and open the file in a new tab. */
+.media-frame {
+  height: 100%;
+  min-height: 220px;
+}
+
+/* media-controls: Open / Download buttons (visible on all breakpoints) */
+.media-controls {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
   display: flex;
   gap: 8px;
-  padding: 10px;
-  background: rgba(255,255,255,0.9);
+  z-index: 4;
+}
+
+.media-controls .btn-open,
+.media-controls .btn-download {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(4,21,38,0.06);
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  color: var(--text-main);
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(4,10,24,0.06);
+  font-size: 0.9rem;
+}
+
+/* Slides controls (for multi-asset cards) */
+.slides-controls {
   position: absolute;
   top: 8px;
   left: 8px;
-  z-index: 2;
+  display: flex;
+  gap: 8px;
+  z-index: 4;
 }
 .slide-btn {
   padding: 6px 8px;
@@ -106,97 +70,38 @@
   cursor: pointer;
   font-size: 0.85rem;
 }
-.slide-frame {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
+
+/* Make the iframe content scrollable on desktop */
+.media-frame {
+  overflow: auto;
 }
 
-/* Body */
-.project-body {
-  padding: 12px 16px 18px 16px;
-  margin-top: auto;
+/* When images are used inside the iframe via src pointing to image, some browsers don't render properly.
+   slide-frame may host an image URL: ensure it displays via object-fit */
+.slide-frame[src$=".png"],
+.slide-frame[src$=".jpg"],
+.slide-frame[src$=".jpeg"] {
+  object-fit: contain;
 }
 
-.project-desc {
-  margin: 0 0 10px 0;
-  color: #4b4b60;
-  font-size: 0.95rem;
+/* Mobile adjustments: hide embedded PDF frame for small screens (JS will enforce),
+   keep buttons visible so users can "Open" in native viewer (recommended on phones) */
+@media (max-width: 768px) {
+  .media-frame.media-pdf-hidden {
+    display: none !important;
+  }
+
+  .media-controls {
+    right: 8px;
+    bottom: 8px;
+  }
 }
 
-.project-tags {
-  display: flex;
-  gap: 8px;
-}
-
-.tag {
-  display: inline-block;
-  background: rgba(79,70,229,0.08);
-  color: #4f46e5;
-  padding: 6px 8px;
-  font-size: 0.8rem;
-  border-radius: 8px;
-}
-
-/* Fullscreen overlay fallback */
-.project-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(10,11,16,0.7);
-  display: grid;
-  place-items: center;
-  z-index: 9999;
-  padding: 24px;
-}
-
-.project-overlay .overlay-card {
-  width: 100%;
-  max-width: 1200px;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(2,6,23,0.5);
-  animation: overlayIn 160ms ease;
-}
-
-@keyframes overlayIn {
-  from { transform: translateY(8px) scale(.995); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-.overlay-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(15,15,15,0.06);
-}
-
-.overlay-title {
-  font-weight:700;
-}
-
-.overlay-close {
-  background: transparent;
-  border: none;
-  font-size: 1.05rem;
-  padding: 8px;
-  cursor: pointer;
-}
-
-/* When in actual browser fullscreen, ensure body background is neutral */
-:fullscreen .project-card,
-:-webkit-full-screen .project-card {
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-/* Responsive tweaks */
-@media (max-width: 640px) {
-  .project-card { min-height: 300px; }
-  .project-title { font-size: 1rem; }
-  .slides-controls { top: 6px; left: 6px; padding: 8px; }
+/* Small polish: ensure download buttons visible on low-res */
+@media (max-width: 420px) {
+  .media-controls .btn-open,
+  .media-controls .btn-download {
+    padding: 6px 8px;
+    font-size: 0.82rem;
+  }
 }
