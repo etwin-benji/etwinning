@@ -1,99 +1,97 @@
-// Enhanced fullscreen handling with mobile fallbacks.
-// Place as js/projects.js (replaces the previous file)
+// Updated projects.js
+// - Improved mobile compatibility for PDFs/PPTX
+// - PPTX opens in Office viewer (if available) or triggers download
+// - PDFs open in new tab on mobile for full native viewing (multi-page)
+// - Fullscreen behavior still applied to video & images where possible
 
 document.addEventListener('DOMContentLoaded', () => {
   const fullscreenButtons = document.querySelectorAll('.btn-fullscreen');
 
-  // Use pointerup so it works reliably on touch & mouse
+  // Utility: detect mobile (coarse pointer OR small viewport)
+  const isMobile = () => {
+    return window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 820;
+  };
+
+  // Convert relative asset path to absolute URL (required for Office viewer)
+  const absoluteUrl = (relativePath) => {
+    try {
+      return new URL(relativePath, location.href).href;
+    } catch {
+      return relativePath;
+    }
+  };
+
+  // Open Office Online viewer for .pptx/.docx if possible
+  const openOfficeViewer = (fileUrl) => {
+    // Use the Office web viewer for pptx/docx: embed/view links
+    const url = 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(fileUrl);
+    window.open(url, '_blank', 'noopener');
+  };
+
+  // Primary behavior for fullscreen button
   fullscreenButtons.forEach(btn => {
     btn.addEventListener('pointerup', async (e) => {
-      // Ensure this is the primary pointer (avoid secondary-button triggers)
       if (e.pointerType === 'mouse' && e.button !== 0) return;
 
       const card = e.currentTarget.closest('.project-card');
       if (!card) return;
 
-      // Prefer the most suitable media element within the card
-      const video = card.querySelector('video');
+      // Prefer to fullscreen the best candidate
+      const video = card.querySelector('.media-video');
+      const img = card.querySelector('.media-img');
       const slideFrame = card.querySelector('.slide-frame');
-      const iframe = card.querySelector('iframe:not(.slide-frame)');
-      const img = card.querySelector('img');
+      const pdfFrame = card.querySelector('.media-wrapper.media-pdf .media-frame, .media-frame[src$=".pdf"]');
+      const genericFrame = slideFrame || pdfFrame;
 
-      // Try fullscreen on the best candidate in order: video -> slideFrame -> iframe -> img -> card
-      try {
-        if (video) {
-          // iOS Safari exposes webkitEnterFullscreen() for native fullscreen on videos
+      // Videos: try to use native fullscreen (including iOS webkitEnterFullscreen)
+      if (video) {
+        try {
           if (typeof video.webkitEnterFullscreen === 'function') {
-            // some iOS versions require a play call before entering native fullscreen
-            try { await video.play(); } catch (_) { /* ignore play errors */ }
+            try { await video.play(); } catch (_) {}
             video.webkitEnterFullscreen();
             return;
           }
-
-          if (video.requestFullscreen) {
-            await video.requestFullscreen();
-            return;
-          } else if (video.webkitRequestFullscreen) {
-            video.webkitRequestFullscreen();
-            return;
-          } else if (video.msRequestFullscreen) {
-            video.msRequestFullscreen();
-            return;
-          }
-        }
-
-        if (slideFrame) {
-          // slideFrame is usually an iframe showing a PDF/image — try fullscreen
-          if (slideFrame.requestFullscreen) {
-            await slideFrame.requestFullscreen();
-            return;
-          } else if (slideFrame.webkitRequestFullscreen) {
-            slideFrame.webkitRequestFullscreen();
-            return;
-          } else if (slideFrame.msRequestFullscreen) {
-            slideFrame.msRequestFullscreen();
-            return;
-          }
-        }
-
-        if (iframe) {
-          // Iframes may be blocked by some browsers when cross-origin.
-          if (iframe.requestFullscreen) {
-            await iframe.requestFullscreen();
-            return;
-          } else if (iframe.webkitRequestFullscreen) {
-            iframe.webkitRequestFullscreen();
-            return;
-          } else if (iframe.msRequestFullscreen) {
-            iframe.msRequestFullscreen();
-            return;
-          }
-        }
-
-        if (img) {
-          if (img.requestFullscreen) {
-            await img.requestFullscreen();
-            return;
-          } else if (img.webkitRequestFullscreen) {
-            img.webkitRequestFullscreen();
-            return;
-          } else if (img.msRequestFullscreen) {
-            img.msRequestFullscreen();
-            return;
-          }
-        }
-      } catch (err) {
-        // If any fullscreen attempt throws, we'll fall back to overlay below
-        // (Common for cross-origin iframes or restrictive mobile browsers)
-        console.warn('Fullscreen attempt failed, falling back to overlay', err);
+          if (video.requestFullscreen) { await video.requestFullscreen(); return; }
+          if (video.webkitRequestFullscreen) { video.webkitRequestFullscreen(); return; }
+          if (video.msRequestFullscreen) { video.msRequestFullscreen(); return; }
+        } catch (err) { console.warn('video fullscreen failed', err); }
       }
 
-      // Fallback: open overlay modal (cloned card)
+      // Images: fullscreen if supported
+      if (img) {
+        try {
+          if (img.requestFullscreen) { await img.requestFullscreen(); return; }
+          if (img.webkitRequestFullscreen) { img.webkitRequestFullscreen(); return; }
+        } catch (err) { console.warn('image fullscreen failed', err); }
+      }
+
+      // For PDFs / iframes on mobile: open in new tab (native viewer is best)
+      if (genericFrame) {
+        const src = genericFrame.getAttribute('src') || '';
+        if (src) {
+          // If mobile: open in new tab to use native PDF viewer
+          if (isMobile()) {
+            window.open(absoluteUrl(src), '_blank', 'noopener');
+            return;
+          }
+
+          // Desktop: try to fullscreen the iframe
+          try {
+            if (genericFrame.requestFullscreen) { await genericFrame.requestFullscreen(); return; }
+            if (genericFrame.webkitRequestFullscreen) { genericFrame.webkitRequestFullscreen(); return; }
+            if (genericFrame.msRequestFullscreen) { genericFrame.msRequestFullscreen(); return; }
+          } catch (err) {
+            console.warn('iframe fullscreen failed', err);
+          }
+        }
+      }
+
+      // Fallback overlay (cloned card)
       openOverlay(card);
     });
   });
 
-  // Slide buttons (for cards with multiple assets e.g., project 16/17)
+  // Slide buttons (for cards with multiple assets e.g., pdf/pptx/image)
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.slide-btn');
     if (!btn) return;
@@ -105,53 +103,99 @@ document.addEventListener('DOMContentLoaded', () => {
     const src = btn.getAttribute('data-src');
     if (!src) return;
 
-    // If non-renderable file, open in a new tab
-    if (/\.(pptx|docx)$/i.test(src)) {
-      window.open(src, '_blank');
+    // If PPTX (or other Office file) open with Office viewer in new tab
+    if (/\.(pptx|ppt|docx|doc|xlsx)$/i.test(src)) {
+      const abs = absoluteUrl(src);
+      openOfficeViewer(abs);
       return;
     }
 
-    // For images, if the slide-frame is an iframe we can set src to the image
-    frame.src = src;
-  });
-
-  // Close overlay on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeOverlay();
-      if (document.fullscreenElement) {
-        document.exitFullscreen && document.exitFullscreen();
+    // For PDFs: on mobile open in new tab, on desktop set iframe src
+    if (/\.pdf$/i.test(src)) {
+      if (isMobile()) {
+        window.open(absoluteUrl(src), '_blank', 'noopener');
+        return;
+      } else {
+        frame.src = src;
+        return;
       }
     }
-  });
 
-  // Close overlay when clicking outside content
-  document.addEventListener('click', (e) => {
-    const overlay = document.querySelector('.project-overlay');
-    if (!overlay) return;
-    const content = overlay.querySelector('.overlay-card');
-    if (!content) return;
-    if (!content.contains(e.target)) {
-      closeOverlay();
-    }
-  });
-
-  // Keep overlay in sync with fullscreen state
-  ['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(evt => {
-    document.addEventListener(evt, () => {
-      if (!document.fullscreenElement) {
-        closeOverlay();
+    // For images: set iframe src to image (most browsers can render image in iframe)
+    if (/\.(png|jpe?g|gif|webp)$/i.test(src)) {
+      // If the slide-frame is an iframe we set src, otherwise if it's an <img> replace it
+      if (frame.tagName.toLowerCase() === 'iframe') {
+        frame.src = src;
       } else {
-        // If user entered real fullscreen, remove any fallback overlay just in case
-        closeOverlay();
+        // fallback: replace with an <img> element
+        const img = document.createElement('img');
+        img.className = 'media-img';
+        img.src = src;
+        img.alt = parentCard.querySelector('.project-title')?.textContent || 'Project image';
+        const wrapper = parentCard.querySelector('.project-media .media-wrapper') || parentCard.querySelector('.project-media');
+        if (wrapper) {
+          wrapper.innerHTML = '';
+          wrapper.appendChild(img);
+        }
+      }
+      return;
+    }
+
+    // Default: open in new tab
+    window.open(absoluteUrl(src), '_blank', 'noopener');
+  });
+
+  // Media controls: handle Open/Download and improve mobile behavior
+  document.addEventListener('click', (e) => {
+    const openBtn = e.target.closest('.btn-open');
+    if (!openBtn) return;
+    const href = openBtn.getAttribute('href');
+    if (!href) return;
+
+    // If it's a pptx on mobile try Office viewer, otherwise open in new tab
+    if (/\.(pptx|ppt|docx|doc|xlsx)$/i.test(href)) {
+      const abs = absoluteUrl(href);
+      openOfficeViewer(abs);
+      e.preventDefault();
+      return;
+    }
+
+    // PDFs: open new tab (native viewer)
+    if (/\.pdf$/i.test(href)) {
+      window.open(absoluteUrl(href), '_blank', 'noopener');
+      e.preventDefault();
+      return;
+    }
+
+    // Otherwise default behavior (download link or external)
+  });
+
+  // On initial load: for small screens, hide embedded PDF iframe to avoid single-page preview issues
+  const adaptPdfForMobile = () => {
+    const isM = isMobile();
+    document.querySelectorAll('.media-wrapper.media-pdf').forEach(wrapper => {
+      const frame = wrapper.querySelector('.media-frame');
+      if (!frame) return;
+      if (isM) {
+        // hide frame (some mobile browsers show only first page or scrollbar issues)
+        frame.classList.add('media-pdf-hidden');
+        // ensure "Open" button is visible and focused UX
+        const openBtn = wrapper.querySelector('.btn-open');
+        if (openBtn) openBtn.style.display = 'inline-flex';
+      } else {
+        frame.classList.remove('media-pdf-hidden');
       }
     });
-  });
+  };
 
-  // Overlay helpers (same UX fallback as before)
+  // Run on load and resize/orientation change
+  adaptPdfForMobile();
+  window.addEventListener('resize', debounce(adaptPdfForMobile, 180));
+  window.addEventListener('orientationchange', () => setTimeout(adaptPdfForMobile, 300));
+
+  // Overlay helpers reused from previous version
   function openOverlay(card) {
-    closeOverlay(); // ensure single overlay
-
+    closeOverlay();
     const overlay = document.createElement('div');
     overlay.className = 'project-overlay';
     overlay.setAttribute('role', 'dialog');
@@ -176,7 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.createElement('div');
     body.style.padding = '16px';
 
-    // Clone useful parts: media and project-body
     const media = card.querySelector('.project-media');
     const desc = card.querySelector('.project-body');
     if (media) body.appendChild(media.cloneNode(true));
@@ -187,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.appendChild(overlayCard);
     document.body.appendChild(overlay);
 
-    // Prevent body scroll while overlay is open
     document.documentElement.style.overflow = 'hidden';
   }
 
@@ -198,4 +240,45 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.style.overflow = '';
     }
   }
+
+  // Close overlay on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeOverlay();
+      if (document.fullscreenElement) {
+        document.exitFullscreen && document.exitFullscreen();
+      }
+    }
+  });
+
+  // Close overlay when clicking outside content
+  document.addEventListener('click', (e) => {
+    const overlay = document.querySelector('.project-overlay');
+    if (!overlay) return;
+    const content = overlay.querySelector('.overlay-card');
+    if (!content) return;
+    if (!content.contains(e.target) && !e.target.closest('.btn-fullscreen')) {
+      closeOverlay();
+    }
+  });
+
+  // Debounce helper
+  function debounce(fn, wait) {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn.apply(this, args), wait);
+    };
+  }
+
+  // Keep overlay in sync with fullscreen state
+  ['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(evt => {
+    document.addEventListener(evt, () => {
+      if (!document.fullscreenElement) {
+        closeOverlay();
+      } else {
+        closeOverlay();
+      }
+    });
+  });
 });
