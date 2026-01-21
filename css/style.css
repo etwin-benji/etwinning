@@ -551,6 +551,8 @@ footer {
    RESPONSIVE / MOBILE
    - panels collapse or adjust width to avoid awkward cuts on small screens
    - seam and wash adjusted for smaller devices
+   - on desktop the layout remains left/right split; on mobile we switch to
+     top/bottom split with the "right" image positioned on the bottom.
 ========================= */
 
 @media (max-width: 1280px) {
@@ -591,42 +593,75 @@ footer {
   .showcase-card { grid-template-columns: 1fr; }
   .page-hero { padding-top: 5rem; }
 
-  /* Mobile: show left image as top banner (full width) with seam fade */
+  /* Mobile: show left image as top banner (full width) */
   body::before {
     left: 0;
-    width: 100%;
-    height: 45vh;
+    top: 0;
     bottom: auto;
+    width: 100%;
+    height: 50vh; /* top half on phone */
+    z-index: -4;
     background-image:
       linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.00)),
       url("../assets/bg-left.png");
     background-position: center top;
+    background-repeat: no-repeat;
     background-size: cover;
   }
 
-  /* Hide the right panel to avoid tiny-crop artifacts */
-  body::after { display: none; }
-
-  html::before {
-    width: 100%;
-    height: 45vh;
-    top: 0;
+  /* Mobile: show right image as bottom banner (full width) */
+  body::after {
     left: 0;
-    transform: none;
-    background: linear-gradient(
-      to bottom,
-      rgba(255,255,255,0) 30%,
-      rgba(255,255,255,0.28) 50%,
-      rgba(255,255,255,0) 70%
-    );
-    z-index: -3;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: 50vh; /* bottom half on phone */
+    z-index: -4;
+    background-image:
+      linear-gradient(to top, rgba(255,255,255,0.10), rgba(255,255,255,0.00)),
+      url("../assets/bg-right.png");
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
   }
 
-  html::after {
+  /* Replace the earlier vertical seam with a horizontal blend for mobile
+     so the two images transition softly in the middle. */
+  html::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    pointer-events: none;
     background: linear-gradient(
-      rgba(255,255,255,0.24),
-      rgba(255,255,255,0.16)
+      180deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.26) 35%,
+      rgba(255,255,255,0.46) 50%,
+      rgba(255,255,255,0.26) 65%,
+      rgba(255,255,255,0) 100%
     );
+    mix-blend-mode: normal;
+    will-change: opacity;
+  }
+
+  /* Slightly stronger white wash on mobile but reduced so top/bottom images remain visible */
+  html::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background: linear-gradient(
+      rgba(255,255,255,0.30),
+      rgba(255,255,255,0.24)
+    );
+    will-change: opacity;
   }
 }
 
