@@ -342,24 +342,38 @@
       </div>
     </article>
 
-    <!-- 14 -->
-    <article class="project-card" data-project-id="14">
-      <div class="project-card-top">
-        <h3 class="project-title">Elif Yücel & İpek Gülcem Yücel & Azra Ceylan / Niels De Jong & Tim Boose & Matts Arbouw</h3>
-        <div class="project-actions">
-          <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
-        </div>
-      </div>
-      <div class="project-media" aria-label="Project 14 docx">
-        <div class="media-wrapper media-download">
-          <a class="btn-download" href="assets/14-elif-yucel_ipek-gulcem-yucel_azra-ceylan-niels-tim-matts.docx" download>Download .docx</a>
-        </div>
-      </div>
-      <div class="project-body">
-        <p class="project-desc">Urban Heat Island Project</p>
-        <div class="project-tags"><span class="tag">Project</span></div>
-      </div>
-    </article>
+<!-- Updated project 14: two assets (DOCX + PDF). Use slide buttons to access both; PDF shown in-card, DOCX opens in Office viewer / download. -->
+<article class="project-card" data-project-id="14">
+  <div class="project-card-top">
+    <h3 class="project-title">Elif Yücel & İpek Gülcem Yücel & Azra Ceylan / Niels De Jong & Tim Boose & Matts Arbouw</h3>
+    <div class="project-actions">
+      <button class="btn-fullscreen" aria-label="Enter fullscreen" title="Fullscreen">
+        <i class="fa-solid fa-expand"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="project-media" role="document" aria-label="Project 14 files">
+    <div class="slides-controls">
+      <button class="slide-btn" data-src="assets/14-elif-yucel_ipek-gulcem-yucel_azra-ceylan-niels-tim-matts.docx">Open DOCX</button>
+      <button class="slide-btn" data-src="assets/14-elif-yucel_ipek-gulcem-yucel_azra-ceylan-niels-tim-matts.pdf">View PDF</button>
+    </div>
+
+    <!-- iframe shows PDF by default (mobile behavior handled in projects.js) -->
+    <iframe class="slide-frame media-frame" src="assets/14-elif-yucel_ipek-gulcem-yucel_azra-ceylan-niels-tim-matts.pdf" title="Project 14 PDF"></iframe>
+
+    <div class="media-controls">
+      <a class="btn-open" href="assets/14-elif-yucel_ipek-gulcem-yucel_azra-ceylan-niels-tim-matts.pdf" target="_blank" rel="noopener">Open</a>
+      <a class="btn-download" href="assets/14-elif-yucel_ipek-gulcem-yucel_azra-ceylan-niels-tim-matts.pdf" download>Download PDF</a>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <p class="project-desc">Urban Heat Island Project</p>
+    <div class="project-tags"><span class="tag">Project</span></div>
+  </div>
+</article>
+```
 
     <!-- 15 -->
     <article class="project-card" data-project-id="15">
